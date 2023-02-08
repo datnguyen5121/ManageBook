@@ -1,5 +1,76 @@
-import Content1 from "../Content1";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input } from "antd";
+import "./Login.scss";
 const Login = () => {
-  return <div>{/* <Content1 /> */}dat</div>;
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
+  };
+  return (
+    <>
+      <div className="login-page-container">
+        <div className="login-title">Login</div>
+        <div className="login-content">
+          <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+          >
+            <Form.Item
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Username!",
+                },
+              ]}
+            >
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Username"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Password!",
+                },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+            <Form.Item className="flex-1">
+              <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <a className="login-form-forgot" href="">
+                Forgot password
+              </a>
+            </Form.Item>
+
+            <Form.Item className="flex-2">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                Log in
+              </Button>
+              Or <a href="">register now!</a>
+            </Form.Item>
+          </Form>
+        </div>
+      </div>
+    </>
+  );
 };
 export default Login;

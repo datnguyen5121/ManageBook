@@ -1,0 +1,33 @@
+ body, html {
+    margin: 0;
+}   
+    .app-container{
+        .header-app-container{
+            position: absolute;
+            z-index: 1;
+        }
+        .main-container{
+            
+            .app-content{
+                .homepage-container{
+                        display: flex;
+                        background-image: url('./assets/library-login-page.jpg');
+                        background-size:     cover;                    
+                        background-repeat:   no-repeat;
+                        background-position: center center;
+                        min-height: 100vh;
+                .left-content-homepage{
+                    width: 65%;
+                }
+                .right-content-homepage{
+                    width: 35%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-right: 30px;
+                }      
+                }
+            }
+        }
+    }
+    
