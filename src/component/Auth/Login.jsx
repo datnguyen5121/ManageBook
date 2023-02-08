@@ -1,12 +1,54 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, notification } from "antd";
+import { useState } from "react";
 import "./Login.scss";
-const Login = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+import { postLoginUser } from "../../services/apiServices";
+import { useNavigate } from "react-router-dom";
+
+const Login = (props) => {
+  const [api, contextHolder] = notification.useNotification();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      );
+  };
+  const handleSubmitBtnLogin = async () => {
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      notification.error({
+        message: "Error",
+        placement: "bottomRight",
+        description: "Invalid Email",
+      });
+      return;
+    }
+    if (!password) {
+      notification.error({
+        message: "Error",
+        placement: "bottomRight",
+        description: "Invalid Password",
+      });
+      return;
+    }
+    const data = await postLoginUser(email, password);
+    if (data && +data.EC === 0) {
+      notification.success({
+        message: "Success",
+        placement: "bottomRight",
+        description: "Login Success",
+      });
+      navigate("/");
+    }
+    console.log(data);
   };
   return (
     <>
+      {contextHolder}
       <div className="login-page-container">
         <div className="login-title">Login</div>
         <div className="login-content">
@@ -16,7 +58,6 @@ const Login = () => {
             initialValues={{
               remember: true,
             }}
-            onFinish={onFinish}
           >
             <Form.Item
               name="username"
@@ -30,6 +71,8 @@ const Login = () => {
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 placeholder="Username"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </Form.Item>
             <Form.Item
@@ -45,11 +88,13 @@ const Login = () => {
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Item>
             <Form.Item className="flex-1">
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox style={{ paddingLeft: 8 }}>Remember me</Checkbox>
               </Form.Item>
 
               <a className="login-form-forgot" href="">
@@ -62,6 +107,7 @@ const Login = () => {
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"
+                onClick={() => handleSubmitBtnLogin()}
               >
                 Log in
               </Button>

@@ -5,13 +5,15 @@
     padding: 15px;
     height: 500px;
     width: 370px;
-    border: 1px solid #8c56db   ;
+    border: 1px solid #8c56db;
     border-radius: 15px;
-    opacity: 0.9;
+    // opacity: 0.9;
     .login-title {
+        color: #5a51ea;
+        font-family: 'Trocchi', serif;
         padding-bottom: 10px;
         align-self: center;
-        font-size: 20px;
+        font-size: 23px;
         font-weight: 500;
     }
     .login-content{
@@ -20,11 +22,11 @@
             justify-content: space-between;
         }
         .flex-2 .ant-form-item-control-input-content{
-            display: flex;
             align-items: center;
             gap: 10px;
             button.ant-btn.css-dev-only-do-not-override-ixblex.ant-btn-primary.login-form-button {
                 background-color: #5a51ea !important;
+                width: 100%;
             }
         }
     }
