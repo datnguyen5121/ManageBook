@@ -1,21 +1,16 @@
 import "./ManageAccount.scss";
 import { Layout, Space } from "antd";
 import CreateAccount from "./CreateAccount";
+import ManageAdmin from "./ManageAdmin";
 const { Sider, Content } = Layout;
 
 const contentStyle = {
   textAlign: "center",
-  minHeight: 120,
-  lineHeight: "120px",
+  minHeight: 20,
+  lineHeight: "50px",
   color: "black",
-  paddingTop: "20px",
+  paddingTop: "5px",
   backgroundColor: "#fff",
-};
-const siderStyle = {
-  textAlign: "center",
-  lineHeight: "100vh",
-  color: "#fff",
-  backgroundColor: "#3ba0e9",
 };
 
 const ManageAccount = () => {
@@ -27,13 +22,12 @@ const ManageAccount = () => {
           width: "100%",
           height: "100%",
         }}
-        size={[0, 48]}
+        size="middle"
       >
         <Layout>
-          <Sider style={siderStyle}>Sider</Sider>
           <Layout>
             <Content style={contentStyle}>
-              <CreateAccount />
+              <ManageAdmin />
             </Content>
           </Layout>
         </Layout>

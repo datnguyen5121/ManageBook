@@ -2,7 +2,7 @@ import "./ManageBookUser.scss";
 import HeaderPage from "../../component/Header/HeaderPage";
 import { Pagination } from "antd";
 import ListBook from "../ListBook/ListBook";
-import ManageNavigation from "../ManageNavigation/ManageNavigation";
+import ManageNavigation from "../Navigation/ManageNavigation";
 const ManageBookUser = () => {
   return (
     <>

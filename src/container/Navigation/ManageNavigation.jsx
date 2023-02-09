@@ -65,7 +65,11 @@ const items = [
         type: "group",
         children: [
           {
-            label: "Thông tin",
+            label: "Thông tin User",
+            key: "/manage-user",
+          },
+          {
+            label: "Chuyển đến trang Admin",
             key: "/manage-account",
           },
           {

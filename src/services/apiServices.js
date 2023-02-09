@@ -28,4 +28,30 @@ const postLoginUser = (userEmail, userPassword) => {
 // app.delete("/api/delete-all-user", userController.deleteAllUser);
 // app.put("/api/update-user-by-id", userController.updateUserById);
 
-export { postLoginUser };
+const getAllUser = () => {
+  return axios.get(`/api/get-all-user`);
+};
+const createNewUser = (email, password, firstName, lastName, address, gender, roleId) => {
+  const data = new URLSearchParams();
+  data.append("email", email);
+  data.append("password", password);
+  data.append("firstName", firstName);
+  data.append("lastName", lastName);
+  data.append("address", address);
+  data.append("gender", gender);
+  data.append("roleId", roleId);
+  return axios.post(`/api/create-new-user`, data);
+};
+const updateUserById = (id, email, password, firstName, lastName, address, gender, roleId) => {
+  const data = new URLSearchParams();
+  data.append("email", email);
+  data.append("password", password);
+  data.append("firstName", firstName);
+  data.append("lastName", lastName);
+  data.append("address", address);
+  data.append("gender", gender);
+  data.append("roleId", roleId);
+  return axios.put(`/api/update-user-by-id`, id, data);
+};
+
+export { postLoginUser, getAllUser, createNewUser, updateUserById };

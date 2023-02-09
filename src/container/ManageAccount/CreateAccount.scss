@@ -1,3 +1,11 @@
 .create-account-container {
- 
+    display: flex;
+    flex-direction: column;
+    .label.ant-form-item-required{
+        padding-right: 10px;
+    }
+   
+    
+   
+    
 }

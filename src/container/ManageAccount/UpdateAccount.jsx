@@ -1,13 +1,14 @@
 import { Button, Form, Input, Select, Modal, notification } from "antd";
-import { useState } from "react";
+import { useForm } from "antd/es/form/Form";
+import { useEffect, useState } from "react";
 import { createNewUser } from "../../services/apiServices";
-import { getAllUser } from "../../services/apiServices";
-
+import { updateUserById } from "../../services/apiServices";
 const { Option } = Select;
 
-const CreateAccount = (props) => {
+const UpdateAccount = (props) => {
+  const [formUpdate] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
-  let { isModalCreateOpen, setIsModalCreateOpen } = props;
+  let { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstName] = useState("");
@@ -16,9 +17,37 @@ const CreateAccount = (props) => {
   const [gender, setGender] = useState("");
   const [roleId, setRoleId] = useState("");
 
+  useEffect(() => {
+    dataUpdate && handleFillForm(dataUpdate);
+  }, [dataUpdate]);
+
+  useEffect(() => {
+    console.log("run Effect modalupdateuser");
+
+    if (dataUpdate?.email) {
+      setEmail(dataUpdate.email);
+    }
+    if (dataUpdate?.password) {
+      setPassword(dataUpdate.password);
+    }
+    if (dataUpdate?.firstName) {
+      setFirstName(dataUpdate.firstName);
+    }
+    if (dataUpdate?.lastName) {
+      setLastName(dataUpdate.lastName);
+    }
+    if (dataUpdate?.address) {
+      setAddress(dataUpdate.address);
+    }
+    if (dataUpdate?.gender) {
+      setGender(dataUpdate.gender);
+    }
+    if (dataUpdate?.roleId) {
+      setRoleId(dataUpdate.roleId);
+    }
+  }, [dataUpdate]);
   const handleOk = async () => {
     let data = await createNewUser(email, password, firstname, lastname, address, gender, roleId);
-    console.log(data);
     if (data && data.EC === 0) {
       notification.success({
         message: "Success",
@@ -36,7 +65,7 @@ const CreateAccount = (props) => {
     }
   };
   const handleCancel = () => {
-    setIsModalCreateOpen(false);
+    setIsModalUpdateOpen(false);
     setEmail("");
     setPassword("");
     setFirstName("");
@@ -52,20 +81,34 @@ const CreateAccount = (props) => {
   const onRoleId = (value) => {
     setRoleId(value);
   };
+
+  const handleSubmit = () => {
+    console.log("submit okkk");
+  };
+
+  const handleFillForm = (data) => {
+    formUpdate.setFieldValue("email", data.email);
+  };
   return (
     <>
       {contextHolder}
-      <div className="create-account-container">
+      <div className="update-account-container">
         <Modal
-          title="Create Account"
-          open={isModalCreateOpen}
-          onOk={handleOk}
+          title="Update Account"
+          open={isModalUpdateOpen}
+          //   onOk={handleOk}
           onCancel={handleCancel}
+          footer={null}
         >
           <div style={{ fontWeight: 200, fontSize: "25px", textAlign: "center" }}>
-            Create Account
+            Update Account
           </div>
-          <Form style={{ paddingRight: 20, paddingLeft: 20 }}>
+          <Form
+            style={{ paddingRight: 20, paddingLeft: 20 }}
+            onFinish={handleSubmit}
+            id="formUpdate"
+            form={formUpdate}
+          >
             <Form.Item
               label="Email"
               name="email"
@@ -178,10 +221,13 @@ const CreateAccount = (props) => {
               </Select>
             </Form.Item>
           </Form>
+          <Button type="primary" id="formUpdate" htmlType="submit">
+            Update
+          </Button>
         </Modal>
       </div>
     </>
   );
 };
 
-export default CreateAccount;
+export default UpdateAccount;
