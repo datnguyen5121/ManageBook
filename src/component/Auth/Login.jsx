@@ -42,7 +42,7 @@ const Login = (props) => {
         placement: "bottomRight",
         description: "Login Success",
       });
-      navigate("/");
+      navigate("/manage-book-user");
     }
     console.log(data);
   };
