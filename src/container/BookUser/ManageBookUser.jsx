@@ -1,8 +1,7 @@
 import "./ManageBookUser.scss";
-import HeaderPage from "../../component/Header/HeaderPage";
-import { Pagination } from "antd";
 import ListBook from "../ListBook/ListBook";
 import ManageNavigation from "../Navigation/ManageNavigation";
+
 const ManageBookUser = () => {
   return (
     <>
@@ -11,6 +10,7 @@ const ManageBookUser = () => {
       </div>
       <div className="manage-book-user-container">
         {/* <HeaderPage /> */}
+        <div className=""></div>
         <ListBook />
       </div>
     </>

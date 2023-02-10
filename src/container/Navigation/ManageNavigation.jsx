@@ -93,6 +93,10 @@ const ManageNavigation = () => {
   //   navigate(e.key);
   //   setCurrent(e.key);
   // };
-  return <Menu onClick={onClick} selectedKeys={[currentUrl]} mode="horizontal" items={items} />;
+  return (
+    <div className="manage-navigation-container">
+      <Menu onClick={onClick} selectedKeys={[currentUrl]} mode="horizontal" items={items} />
+    </div>
+  );
 };
 export default ManageNavigation;

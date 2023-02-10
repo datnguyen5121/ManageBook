@@ -23,7 +23,7 @@ const CreateAccount = (props) => {
       notification.success({
         message: "Success",
         placement: "bottomRight",
-        description: "Login Success",
+        description: "Create Success",
       });
       handleCancel();
       await props.handleGetAllUserFromParent();
@@ -31,7 +31,7 @@ const CreateAccount = (props) => {
       notification.error({
         message: "Error",
         placement: "bottomRight",
-        description: "Invalid Password",
+        description: "Create Error",
       });
     }
   };

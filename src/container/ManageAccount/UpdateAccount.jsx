@@ -1,58 +1,32 @@
 import { Button, Form, Input, Select, Modal, notification } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
-import { createNewUser } from "../../services/apiServices";
 import { updateUserById } from "../../services/apiServices";
 const { Option } = Select;
-
 const UpdateAccount = (props) => {
   const [formUpdate] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
   let { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate } = props;
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [gender, setGender] = useState("");
-  const [roleId, setRoleId] = useState("");
 
   useEffect(() => {
     dataUpdate && handleFillForm(dataUpdate);
   }, [dataUpdate]);
-
-  useEffect(() => {
-    console.log("run Effect modalupdateuser");
-
-    if (dataUpdate?.email) {
-      setEmail(dataUpdate.email);
-    }
-    if (dataUpdate?.password) {
-      setPassword(dataUpdate.password);
-    }
-    if (dataUpdate?.firstName) {
-      setFirstName(dataUpdate.firstName);
-    }
-    if (dataUpdate?.lastName) {
-      setLastName(dataUpdate.lastName);
-    }
-    if (dataUpdate?.address) {
-      setAddress(dataUpdate.address);
-    }
-    if (dataUpdate?.gender) {
-      setGender(dataUpdate.gender);
-    }
-    if (dataUpdate?.roleId) {
-      setRoleId(dataUpdate.roleId);
-    }
-  }, [dataUpdate]);
-  const handleOk = async () => {
-    let data = await createNewUser(email, password, firstname, lastname, address, gender, roleId);
+  const handleFormSubmit = async (values) => {
+    let data = await updateUserById(
+      dataUpdate._id,
+      values.email,
+      values.password,
+      values.firstname,
+      values.lastname,
+      values.address,
+      values.gender,
+      values.roleId,
+    );
     if (data && data.EC === 0) {
       notification.success({
         message: "Success",
         placement: "bottomRight",
-        description: "Login Success",
+        description: "Update Success",
       });
       handleCancel();
       await props.handleGetAllUserFromParent();
@@ -60,34 +34,29 @@ const UpdateAccount = (props) => {
       notification.error({
         message: "Error",
         placement: "bottomRight",
-        description: "Invalid Password",
+        description: "Update Error",
       });
     }
   };
+
   const handleCancel = () => {
     setIsModalUpdateOpen(false);
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
-    setAddress("");
-    setGender("");
-    setRoleId("");
   };
   const onGenderChange = (value) => {
     console.log(value);
-    setGender(value);
   };
   const onRoleId = (value) => {
-    setRoleId(value);
-  };
-
-  const handleSubmit = () => {
-    console.log("submit okkk");
+    console.log(value);
   };
 
   const handleFillForm = (data) => {
     formUpdate.setFieldValue("email", data.email);
+    formUpdate.setFieldValue("password", data.password);
+    formUpdate.setFieldValue("firstname", data.firstName);
+    formUpdate.setFieldValue("lastname", data.lastName);
+    formUpdate.setFieldValue("address", data.address);
+    formUpdate.setFieldValue("gender", data.gender);
+    formUpdate.setFieldValue("roleId", data.roleId);
   };
   return (
     <>
@@ -105,15 +74,13 @@ const UpdateAccount = (props) => {
           </div>
           <Form
             style={{ paddingRight: 20, paddingLeft: 20 }}
-            onFinish={handleSubmit}
+            onFinish={(values) => handleFormSubmit(values)}
             id="formUpdate"
             form={formUpdate}
           >
             <Form.Item
               label="Email"
               name="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
               rules={[
                 {
                   required: true,
@@ -121,14 +88,12 @@ const UpdateAccount = (props) => {
                 },
               ]}
             >
-              <Input />
+              <Input disabled={true} />
             </Form.Item>
 
             <Form.Item
               label="Password"
               name="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
               rules={[
                 {
                   required: true,
@@ -136,13 +101,11 @@ const UpdateAccount = (props) => {
                 },
               ]}
             >
-              <Input.Password />
+              <Input.Password disabled={true} />
             </Form.Item>
             <Form.Item
               label="First name"
               name="firstname"
-              value={firstname}
-              onChange={(event) => setFirstName(event.target.value)}
               rules={[
                 {
                   required: true,
@@ -155,8 +118,6 @@ const UpdateAccount = (props) => {
             <Form.Item
               label="Last name"
               name="lastname"
-              value={lastname}
-              onChange={(event) => setLastName(event.target.value)}
               rules={[
                 {
                   required: true,
@@ -170,8 +131,6 @@ const UpdateAccount = (props) => {
             <Form.Item
               label="Address"
               name="address"
-              value={address}
-              onChange={(event) => setAddress(event.target.value)}
               rules={[
                 {
                   required: true,
@@ -192,9 +151,8 @@ const UpdateAccount = (props) => {
             >
               <Select
                 placeholder="Select a option and change input text above"
-                value={gender}
-                onChange={onGenderChange}
                 allowClear
+                onChange={onGenderChange}
               >
                 <Option value="male">male</Option>
                 <Option value="female">female</Option>
@@ -202,7 +160,7 @@ const UpdateAccount = (props) => {
               </Select>
             </Form.Item>
             <Form.Item
-              name="Role"
+              name="roleId"
               label="Role"
               rules={[
                 {
@@ -212,18 +170,17 @@ const UpdateAccount = (props) => {
             >
               <Select
                 placeholder="Select a option and change input text above"
-                value={roleId}
-                onChange={onRoleId}
                 allowClear
+                onChange={onRoleId}
               >
                 <Option value="ADMIN">ADMIN</Option>
                 <Option value="USER">USER</Option>
               </Select>
             </Form.Item>
+            <Button type="primary" htmlType="submit">
+              Update
+            </Button>
           </Form>
-          <Button type="primary" id="formUpdate" htmlType="submit">
-            Update
-          </Button>
         </Modal>
       </div>
     </>

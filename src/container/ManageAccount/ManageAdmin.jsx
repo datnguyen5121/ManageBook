@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { getAllUser } from "../../services/apiServices";
 import CreateAccount from "./CreateAccount";
 import UpdateAccount from "./UpdateAccount";
+import DeleteAccount from "./DeleteAccount";
 
 const ManageAdmin = (props) => {
   const [listUser, setListUser] = useState([]);
   const [dataUpdate, setDataUpdate] = useState({});
+  const [dataDelete, setDataDelete] = useState({});
 
   useEffect(() => {
     handleGetAllUser();
@@ -21,14 +23,20 @@ const ManageAdmin = (props) => {
   };
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
   const showModalCreateParent = () => {
     setIsModalCreateOpen(true);
   };
   const showModalUpdateParent = (user) => {
-    console.log("user", user);
+    console.log("showModalUpdateParent", user);
     setDataUpdate(user);
     setIsModalUpdateOpen(true);
+  };
+  const showModalDeleteParent = (user) => {
+    console.log("showModalDeleteParent", user);
+    setDataDelete(user);
+    setIsModalDeleteOpen(true);
   };
 
   const columns = [
@@ -73,7 +81,7 @@ const ManageAdmin = (props) => {
       render: (_, record) => (
         <Space size="small">
           <a onClick={() => showModalUpdateParent(record)}>Edit </a>
-          <a>Delete</a>
+          <a onClick={() => showModalDeleteParent(record)}>Delete</a>
         </Space>
       ),
     },
@@ -99,6 +107,13 @@ const ManageAdmin = (props) => {
             handleGetAllUserFromParent={handleGetAllUser}
             dataUpdate={dataUpdate}
           />
+          <DeleteAccount
+            isModalDeleteOpen={isModalDeleteOpen}
+            setIsModalDeleteOpen={setIsModalDeleteOpen}
+            handleGetAllUserFromParent={handleGetAllUser}
+            dataDelete={dataDelete}
+          />
+
           <Table
             rowKey={() => Math.random()}
             columns={columns}

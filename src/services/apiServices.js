@@ -43,15 +43,22 @@ const createNewUser = (email, password, firstName, lastName, address, gender, ro
   return axios.post(`/api/create-new-user`, data);
 };
 const updateUserById = (id, email, password, firstName, lastName, address, gender, roleId) => {
-  const data = new URLSearchParams();
-  data.append("email", email);
-  data.append("password", password);
-  data.append("firstName", firstName);
-  data.append("lastName", lastName);
-  data.append("address", address);
-  data.append("gender", gender);
-  data.append("roleId", roleId);
-  return axios.put(`/api/update-user-by-id`, id, data);
+  // const data = new URLSearchParams();
+  // data.append("_id", id);
+  // data.append("email", email);
+  // data.append("password", password);
+  // data.append("firstName", firstName);
+  // data.append("lastName", lastName);
+  // data.append("address", address);
+  // data.append("gender", gender);
+  // data.append("roleId", roleId);
+  const data = { _id: id, email, password, firstName, lastName, address, gender, roleId };
+  return axios.put(`/api/update-user-by-id`, data);
 };
-
-export { postLoginUser, getAllUser, createNewUser, updateUserById };
+const deleteUserById = (id) => {
+  return axios.delete(`/api/delete-user-by-id?_id=${id}`);
+};
+const getAllBook = () => {
+  return axios.get(`/api/get-all-book`);
+};
+export { postLoginUser, getAllUser, createNewUser, updateUserById, deleteUserById, getAllBook };

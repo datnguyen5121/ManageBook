@@ -37,27 +37,19 @@ instance.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    const status = (error && error.response && error.response.status) || 500;
+    // const status = (error && error.response && error.response.status) || 500;
+    const status = error;
+
     console.log(status);
     switch (status) {
       // authentication (token related issues)
       case 401: {
-        notification.error({
-          message: "Error 401",
-          placement: "bottomRight",
-          description: "Error 401",
-        });
         // window.location.href = "/login";
         return Promise.reject(error);
       }
 
       // forbidden (permission related issues)
       case 403: {
-        notification.error({
-          message: "Error 401",
-          placement: "bottomRight",
-          description: "Error 401",
-        });
         return Promise.reject(error);
       }
 
