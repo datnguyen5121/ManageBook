@@ -61,4 +61,15 @@ const deleteUserById = (id) => {
 const getAllBook = () => {
   return axios.get(`/api/get-all-book`);
 };
-export { postLoginUser, getAllUser, createNewUser, updateUserById, deleteUserById, getAllBook };
+const getBookPaginate = (perPage, page) => {
+  return axios.get(`/api/get-book-paginate?page=${page}&limit=${perPage}`);
+};
+export {
+  postLoginUser,
+  getAllUser,
+  createNewUser,
+  updateUserById,
+  deleteUserById,
+  getAllBook,
+  getBookPaginate,
+};
