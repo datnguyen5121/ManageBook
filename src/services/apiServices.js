@@ -1,5 +1,4 @@
 import axios from "../utils/axiosCustomize";
-
 const postLoginUser = (userEmail, userPassword) => {
   return axios.post(`/api/handle-login`, {
     email: userEmail,
@@ -58,6 +57,8 @@ const updateUserById = (id, email, password, firstName, lastName, address, gende
 const deleteUserById = (id) => {
   return axios.delete(`/api/delete-user-by-id?_id=${id}`);
 };
+
+//BOOK
 const getAllBook = () => {
   return axios.get(`/api/get-all-book`);
 };

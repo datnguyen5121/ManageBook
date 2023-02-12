@@ -73,6 +73,10 @@ const items = [
             key: "/manage-account",
           },
           {
+            label: "Quản lý thư viện",
+            key: "/manage-library",
+          },
+          {
             label: "Đăng xuất",
             key: "nguyen",
           },

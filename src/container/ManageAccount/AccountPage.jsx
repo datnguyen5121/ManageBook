@@ -1,19 +1,8 @@
-import "./ManageAccount.scss";
 import { Layout, Space } from "antd";
-import CreateAccount from "./CreateAccount";
-import ManageAdmin from "./ManageAdmin";
 import { Outlet } from "react-router-dom";
 const { Sider, Content } = Layout;
-const contentStyle = {
-  textAlign: "center",
-  minHeight: 20,
-  lineHeight: "50px",
-  color: "black",
-  paddingTop: "5px",
-  backgroundColor: "#fff",
-};
 
-const ManageAccount = () => {
+const AccountPage = () => {
   return (
     <div>
       <Space
@@ -26,7 +15,7 @@ const ManageAccount = () => {
       >
         <Layout>
           <Layout>
-            <Content style={contentStyle}>
+            <Content>
               <Outlet />
             </Content>
           </Layout>
@@ -35,4 +24,4 @@ const ManageAccount = () => {
     </div>
   );
 };
-export default ManageAccount;
+export default AccountPage;

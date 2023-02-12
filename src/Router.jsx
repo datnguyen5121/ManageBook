@@ -3,22 +3,27 @@ import HomePage from "./HomePage";
 import App from "./App";
 import HeaderPage from "./component/Header/HeaderPage";
 import ManageBookUser from "./container/BookUser/ManageBookUser";
-import ManageAccount from "./container/ManageAccount/ManageAccount";
-import UpdateAccount from "./container/ManageAccount/UpdateAccount";
+import AccountPage from "./container/ManageAccount/AccountPage";
 import ManageAdmin from "./container/ManageAccount/ManageAdmin";
-import ListBook from "./container/ListBook/ListBook";
+import ManageLibrary from "./container/ManageLibrary/ManageLibrary";
+import ManageUser from "./container/ManageUser/ManageUser";
+import { notification } from "antd";
 const Router = (props) => {
+  const [api, contextHolder] = notification.useNotification();
   return (
     <>
+      {contextHolder}
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
         </Route>
         <Route path="/manage-book-user" element={<ManageBookUser />} />
         <Route path="/header-page" element={<HeaderPage />} />
-        <Route path="/manage-account" element={<ManageAccount />}>
+        <Route path="/manage-account" element={<AccountPage />}>
           <Route index element={<ManageAdmin />} />
         </Route>
+        <Route path="/manage-library" element={<ManageLibrary />} />
+        <Route path="/manage-user" element={<ManageUser />} />
       </Routes>
     </>
   );

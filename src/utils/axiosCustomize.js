@@ -2,18 +2,23 @@ import axios from "axios";
 import NProgress from "nprogress";
 import { store } from "../redux/store";
 import { notification } from "antd";
+import { memoizedRefreshToken } from "./refreshToken";
 
 NProgress.configure({ showSpinner: false, trickleSpeed: 400 });
 
 const instance = axios.create({
   baseURL: "http://localhost:8080/",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 instance.defaults.withCredentials = true;
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
-    const access_token = store?.getState()?.user?.account?.access_token;
-    console.log(access_token);
+    // const access_token = store?.getState()?.user?.account?.access_token;
+    // console.log(access_token);
+
     // config.headers["Authorization"] = `Bearer ${access_token}`;
     // Do something before request is sent
     NProgress.start();
@@ -45,36 +50,71 @@ instance.interceptors.response.use(
       // authentication (token related issues)
       case 401: {
         // window.location.href = "/login";
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: "401",
+        });
         return Promise.reject(error);
       }
 
       // forbidden (permission related issues)
       case 403: {
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: "403",
+        });
         return Promise.reject(error);
       }
 
       // bad request
       case 400: {
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: "400",
+        });
         return Promise.reject(error);
       }
 
       // not found
       case 404: {
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: "404",
+        });
         return Promise.reject(error);
       }
 
       // conflict
       case 409: {
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: "409",
+        });
         return Promise.reject(error);
       }
 
       // unprocessable
       case 422: {
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: "422",
+        });
         return Promise.reject(error);
       }
 
       // generic api error (server related) unexpected
       default: {
+        notification.error({
+          message: "Error",
+          placement: "bottomRight",
+          description: `${error}`,
+        });
         return Promise.reject(error);
       }
     }

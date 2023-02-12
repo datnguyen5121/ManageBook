@@ -6,7 +6,7 @@ import { getAllUser } from "../../services/apiServices";
 import CreateAccount from "./CreateAccount";
 import UpdateAccount from "./UpdateAccount";
 import DeleteAccount from "./DeleteAccount";
-
+import ManageNavigation from "../Navigation/ManageNavigation";
 const ManageAdmin = (props) => {
   const [listUser, setListUser] = useState([]);
   const [dataUpdate, setDataUpdate] = useState({});
@@ -44,11 +44,13 @@ const ManageAdmin = (props) => {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      width: 50,
     },
     {
       title: "Password",
       dataIndex: "password",
       key: "password",
+      width: 50,
     },
     {
       title: "firstName",
@@ -59,6 +61,7 @@ const ManageAdmin = (props) => {
       title: "lastName",
       key: "lastName",
       dataIndex: "lastName",
+      width: 50,
     },
     {
       title: "Address",
@@ -89,7 +92,8 @@ const ManageAdmin = (props) => {
 
   return (
     <>
-      <div>
+      <div className="manage-admin-container">
+        <ManageNavigation />
         <div className="button-crud-user">
           <Button type="primary" onClick={showModalCreateParent}>
             Create New User By ADMIN
@@ -113,16 +117,7 @@ const ManageAdmin = (props) => {
             handleGetAllUserFromParent={handleGetAllUser}
             dataDelete={dataDelete}
           />
-
-          <Table
-            rowKey={() => Math.random()}
-            columns={columns}
-            dataSource={listUser}
-            style={{
-              paddingLeft: 50,
-              paddingRight: 50,
-            }}
-          />
+          <Table rowKey={() => Math.random()} columns={columns} dataSource={listUser} style={{}} />
         </div>
       </div>
     </>

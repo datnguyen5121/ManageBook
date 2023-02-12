@@ -4,11 +4,14 @@ import { useState } from "react";
 import "./Login.scss";
 import { postLoginUser } from "../../services/apiServices";
 import { useNavigate } from "react-router-dom";
+import { doLogin } from "../../redux/action/userAction";
+import { useDispatch } from "react-redux";
 
 const Login = (props) => {
-  const [api, contextHolder] = notification.useNotification();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const validateEmail = (email) => {
     return String(email)
@@ -42,13 +45,13 @@ const Login = (props) => {
         placement: "bottomRight",
         description: "Login Success",
       });
+      dispatch(doLogin(data));
       navigate("/manage-book-user");
     }
     console.log(data);
   };
   return (
     <>
-      {contextHolder}
       <div className="login-page-container">
         <div className="login-title">Login</div>
         <div className="login-content">

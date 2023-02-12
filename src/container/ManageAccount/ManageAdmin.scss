@@ -1,3 +1,16 @@
-table, th, td {
-    border:1px solid black;
+
+
+.manage-admin-container {
+  .button-crud-user {
+      text-align: center;
+      padding: 5px;
   }
+  .table-list-user{
+      display: flex;
+      margin: 0 auto  ;
+      .ant-table-wrapper{
+          margin: 0 auto;
+          padding-left: 20px;
+      }
+  }
+}
