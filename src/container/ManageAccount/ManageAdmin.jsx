@@ -13,9 +13,9 @@ const ManageAdmin = (props) => {
   const [dataDelete, setDataDelete] = useState({});
 
   useEffect(() => {
-    handleGetAllUser();
+    fetchAllUser();
   }, []);
-  const handleGetAllUser = async () => {
+  const fetchAllUser = async () => {
     const res = await getAllUser();
     if (res && res.EC === 0) {
       setListUser(res.data);
@@ -103,18 +103,18 @@ const ManageAdmin = (props) => {
           <CreateAccount
             isModalCreateOpen={isModalCreateOpen}
             setIsModalCreateOpen={setIsModalCreateOpen}
-            handleGetAllUserFromParent={handleGetAllUser}
+            fetchAllUserFromParent={fetchAllUser}
           />
           <UpdateAccount
             isModalUpdateOpen={isModalUpdateOpen}
             setIsModalUpdateOpen={setIsModalUpdateOpen}
-            handleGetAllUserFromParent={handleGetAllUser}
+            fetchAllUserFromParent={fetchAllUser}
             dataUpdate={dataUpdate}
           />
           <DeleteAccount
             isModalDeleteOpen={isModalDeleteOpen}
             setIsModalDeleteOpen={setIsModalDeleteOpen}
-            handleGetAllUserFromParent={handleGetAllUser}
+            fetchAllUserFromParent={fetchAllUser}
             dataDelete={dataDelete}
           />
           <Table rowKey={() => Math.random()} columns={columns} dataSource={listUser} style={{}} />

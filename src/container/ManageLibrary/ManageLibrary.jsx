@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getAllUser } from "../../services/apiServices";
 import ManageNavigation from "../Navigation/ManageNavigation";
 import { getAllBook } from "../../services/apiServices";
-
+import UpdateLibrary from "./UpdateLibrary";
 const ManageLibrary = (props) => {
   const [dataBook, setBookData] = useState([]);
   const [dataUpdate, setDataUpdate] = useState({});
@@ -27,14 +27,14 @@ const ManageLibrary = (props) => {
   const showModalCreateParent = () => {
     setIsModalCreateOpen(true);
   };
-  const showModalUpdateParent = (user) => {
-    console.log("showModalUpdateParent", user);
-    setDataUpdate(user);
+  const showModalUpdateParent = (book) => {
+    console.log("showModalUpdateParent", book);
+    setDataUpdate(book);
     setIsModalUpdateOpen(true);
   };
-  const showModalDeleteParent = (user) => {
-    console.log("showModalDeleteParent", user);
-    setDataDelete(user);
+  const showModalDeleteParent = (book) => {
+    console.log("showModalDeleteParent", book);
+    setDataDelete(book);
     setIsModalDeleteOpen(true);
   };
 
@@ -80,7 +80,7 @@ const ManageLibrary = (props) => {
       width: 50,
     },
     {
-      title: "price",
+      title: "price($)",
       key: "price",
       dataIndex: "price",
       width: 25,
@@ -108,6 +108,12 @@ const ManageLibrary = (props) => {
           </Button>
         </div>
         <div className="table-list-library">
+          <UpdateLibrary
+            isModalUpdateOpen={isModalUpdateOpen}
+            setIsModalUpdateOpen={setIsModalUpdateOpen}
+            fetchBookDataFromParent={fetchBookData}
+            dataUpdate={dataUpdate}
+          />
           <Table rowKey={() => Math.random()} columns={columns} dataSource={dataBook} style={{}} />
         </div>
       </div>

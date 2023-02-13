@@ -21,11 +21,7 @@ const postLoginUser = (userEmail, userPassword) => {
 
 //Account
 
-// app.get("/api/get-all-user", userController.getAllUser);
-// app.post("/api/create-new-user", userController.createNewUser);
-// app.delete("/api/delete-user-by-id", userController.deleteUserById);
 // app.delete("/api/delete-all-user", userController.deleteAllUser);
-// app.put("/api/update-user-by-id", userController.updateUserById);
 
 const getAllUser = () => {
   return axios.get(`/api/get-all-user`);
@@ -42,15 +38,6 @@ const createNewUser = (email, password, firstName, lastName, address, gender, ro
   return axios.post(`/api/create-new-user`, data);
 };
 const updateUserById = (id, email, password, firstName, lastName, address, gender, roleId) => {
-  // const data = new URLSearchParams();
-  // data.append("_id", id);
-  // data.append("email", email);
-  // data.append("password", password);
-  // data.append("firstName", firstName);
-  // data.append("lastName", lastName);
-  // data.append("address", address);
-  // data.append("gender", gender);
-  // data.append("roleId", roleId);
   const data = { _id: id, email, password, firstName, lastName, address, gender, roleId };
   return axios.put(`/api/update-user-by-id`, data);
 };
@@ -65,6 +52,32 @@ const getAllBook = () => {
 const getBookPaginate = (perPage, page) => {
   return axios.get(`/api/get-book-paginate?page=${page}&limit=${perPage}`);
 };
+
+const updateBookById = (
+  id,
+  author,
+  title,
+  description,
+  datePublish,
+  pageNumber,
+  category,
+  imgUrl,
+  price,
+) => {
+  const data = {
+    _id: id,
+    author,
+    title,
+    description,
+    datePublish,
+    pageNumber,
+    category,
+    imgUrl,
+    price,
+  };
+  return axios.put(`api/update-book-by-id`, data);
+};
+
 export {
   postLoginUser,
   getAllUser,
@@ -73,4 +86,5 @@ export {
   deleteUserById,
   getAllBook,
   getBookPaginate,
+  updateBookById,
 };
