@@ -8,6 +8,7 @@ import ManageAdmin from "./container/ManageAccount/ManageAdmin";
 import ManageLibrary from "./container/ManageLibrary/ManageLibrary";
 import ManageUser from "./container/ManageUser/ManageUser";
 import { notification } from "antd";
+import BookDetail from "./container/BookDetail/BookDetail";
 const Router = (props) => {
   const [api, contextHolder] = notification.useNotification();
   return (
@@ -24,6 +25,7 @@ const Router = (props) => {
         </Route>
         <Route path="/manage-library" element={<ManageLibrary />} />
         <Route path="/manage-user" element={<ManageUser />} />
+        <Route path="/detail-book/:id" element={<BookDetail />} />
       </Routes>
     </>
   );

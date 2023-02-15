@@ -1,0 +1,21 @@
+.ant-modal-root{
+    .ant-modal-wrap{
+        .create-modal{
+            .ant-modal-content{
+                .ant-modal-body{
+                    .form-create {
+                        .upload{
+                            .preview-img{
+                                margin-top: 32px;
+                                width: 200px;
+                                height: 200px;
+                                object-fit: contain;
+                                image-rendering: pixelated
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -8,9 +8,6 @@ NProgress.configure({ showSpinner: false, trickleSpeed: 400 });
 
 const instance = axios.create({
   baseURL: "http://localhost:8080/",
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 instance.defaults.withCredentials = true;
 // Add a request interceptor
@@ -18,7 +15,6 @@ instance.interceptors.request.use(
   function (config) {
     // const access_token = store?.getState()?.user?.account?.access_token;
     // console.log(access_token);
-
     // config.headers["Authorization"] = `Bearer ${access_token}`;
     // Do something before request is sent
     NProgress.start();
@@ -63,7 +59,7 @@ instance.interceptors.response.use(
         notification.error({
           message: "Error",
           placement: "bottomRight",
-          description: "403",
+          description: `${error}`,
         });
         return Promise.reject(error);
       }
@@ -113,7 +109,7 @@ instance.interceptors.response.use(
         notification.error({
           message: "Error",
           placement: "bottomRight",
-          description: `${error}`,
+          description: `${error.response.data.EM}`,
         });
         return Promise.reject(error);
       }

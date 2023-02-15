@@ -1,15 +1,85 @@
+
+
 .listbook-container{
     display: flex ;
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: rgb(225, 253, 253);
+    color: #f5f5fa;
+    background-color: #f5f5fa;
     flex-direction: row;
     // width: 100vh;
+    height: 696px;
+    // height: calc(100vh + 50px);
     flex-wrap: wrap;
     gap: 30px;
     justify-content: center;
+    .card-container{
+        .ant-card-cover{
+            display: flex;
+            justify-content: center;
+            border-radius: 15px;
+            
+            .img-content{
+                image-rendering: pixelated;
+                height: 140px;
+                padding: 30px;
+                filter: drop-shadow(0 0 5px rgb(243, 243, 252));
+                object-fit: contain;
+                img{
+                    border: 1px solid black;
+
+                }
+            }
+        }
+        .ant-card-body{
+            padding: 8px 0px;
+            margin: 0px 12px;
+            min-height: 122px;
+            position: relative;
+            .meta-container{
+                .ant-card-meta-detail{
+                    .ant-card-meta-title{
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 16px;
+                        color: rgb(56, 56, 61);
+                        margin: 0px;
+                        word-break: break-word;
+                    }
+                    .ant-card-meta-description{
+                        font-weight: 400;
+                        font-size: 10px;
+                        line-height: 12px;
+                        min-height: 24px;
+                    }
+                }
+            }
+            .price-container{
+                .price{
+                    text-align: left;
+                    font-size: 16px;
+                    line-height: 24px;
+                    font-weight: 500;
+                    color: rgb(56, 56, 61);
+                    margin: 0px;
+                    display: flex;
+                    -webkit-box-align: center;
+                    align-items: center;
+                }
+            }
+            .badge-delivery{
+                position: absolute;
+                border-top: 1px solid rgb(235, 235, 240);
+                width: 100%;
+                bottom: 2px;
+                color: rgb(128, 128, 137);
+            }
+        }
+    }
     
 }
 .paginate-listbook-container{
         text-align: center;
 }
+
+

@@ -1,1 +1,180 @@
+.book-detail-container{
+    background-color: #f5f5fa;
+    .book-detail-content{
+        display: flex;
+        background-color: white;
+        flex-direction: row;
+        width: 1200px;
+        min-height: 65vh;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        .bookdetail-content-left{
+            width: 40%;
+                .bookdetail-img{
+                    display: flex;
+                    padding: 16px 0px 16px 16px;
+                    justify-content: center;
+                    img{
+                        image-rendering: pixelated;
+                        width: 300px;
+                        height: 300px;
+                        object-fit: contain;
+                    }
+                }
+        }
+        .bookdetail-border{
+            margin: 0px 12px;
+            width: 1px;
+            background: rgb(242, 242, 242);
+            flex-shrink: 0;
+        }
+        .bookdetail-content-right{
+            width: 60%;
+            display: flex;
+            
+            flex-direction: row;
+            .content-1{ 
+                width: 60%;
+                gap: 10px;
+                display: flex;
+                flex-direction: column;
+                .bookdetail-title{
+                margin: 0px 0px 4px;
+                color: rgb(36, 36, 36);
+                font-size: 24px;
+                font-weight: 300;
+                line-height: 32px;
+                word-break: break-word;
 
+            }
+            .bookdetail-author{
+                padding-top: 20px;
+                margin: 0px;
+                color: rgb(36, 36, 36);
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 20px;
+            }
+            .bookdetail-price{
+                border: 1px solid rgb(238, 238, 238);
+                border-radius: 15px;
+                display: flex;
+              
+                flex-direction: column;
+                border-radius: 4px;
+                background-color: rgb(250, 250, 250);
+                padding: 0px 16px 12px;
+                .price-font{
+                    color: rgb(255, 66, 78);
+                    font-size: 32px;
+                    line-height: 40px;
+                    margin-right: 8px;
+                    font-weight: 500;
+                }
+            }
+            .delivery-ship{
+                border-top: 1px solid rgb(242, 242, 242);
+                padding-top: 10px;
+                .delivery-font{
+                   
+                }
+            }
+            .address-user{
+                display: flex;
+                padding: 12px 0px;
+                cursor: pointer;
+                gap: 10px;
+                .address{
+                    text-decoration: underline;
+                    font-size: 18px;
+                    line-height: 24px;
+                    font-weight: 500;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .change-address{
+                    color: rgb(11, 116, 229);
+                    font-size: 15px;
+                    line-height: 24px;
+                    font-weight: 400;
+                }
+            }
+          }
+            .content-2{}
+        }
+    }
+    .book-detail-info{
+        margin-top: 10px;
+        display: flex;
+        background-color: white;
+        flex-direction: column;
+        width: 1200px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 15px;
+        .info-title{
+                color: black;
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 32px;
+                padding: 8px 16px;
+                text-transform: capitalize;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0px;
+        }
+        .info-table{
+            table {
+                tbody{
+                    tr{
+                        font-size: 16px;
+                        border-bottom: 0px;
+                        td{
+                                padding: 10px 15px;
+                             &:first-child {
+                                width: 220px;
+                                vertical-align: top;
+                                color: black;
+                                font-size: 16px;
+                                font-weight: 500;
+                                background: rgb(239, 239, 239);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    .book-detail-description{
+        margin-top: 10px;
+        display: flex;
+        background-color: white;
+        flex-direction: column;
+        width: 1200px;
+        height: 50vh;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        .description-title{
+            color: rgb(51, 51, 51);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 32px;
+            padding: 8px 16px;
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0px;
+        }
+    }
+
+}

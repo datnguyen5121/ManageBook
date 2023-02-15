@@ -52,28 +52,34 @@ const getAllBook = () => {
 const getBookPaginate = (perPage, page) => {
   return axios.get(`/api/get-book-paginate?page=${page}&limit=${perPage}`);
 };
-
-const updateBookById = (
-  id,
-  author,
-  title,
-  description,
-  datePublish,
-  pageNumber,
-  category,
-  imgUrl,
-  price,
-) => {
+const getBookById = (id) => {
+  return axios.get(`/api/get-book-by-id?_id=${id}`);
+};
+const createNewBook = (dataInput) => {
   const data = {
-    _id: id,
-    author,
-    title,
-    description,
-    datePublish,
-    pageNumber,
-    category,
-    imgUrl,
-    price,
+    author: dataInput.author,
+    title: dataInput.title,
+    description: dataInput.description,
+    datePublish: dataInput.datePublish,
+    pageNumber: dataInput.pageNumber,
+    category: dataInput.category,
+    imgUrl: dataInput.imgUrl,
+    price: dataInput.price,
+  };
+
+  return axios.post(`/api/create-new-book`, data);
+};
+const updateBookById = (dataInput) => {
+  const data = {
+    _id: dataInput.id,
+    author: dataInput.author,
+    title: dataInput.title,
+    description: dataInput.description,
+    datePublish: dataInput.datePublish,
+    pageNumber: dataInput.pageNumber,
+    category: dataInput.category,
+    imgUrl: dataInput.imgUrl,
+    price: dataInput.price,
   };
   return axios.put(`api/update-book-by-id`, data);
 };
@@ -87,4 +93,6 @@ export {
   getAllBook,
   getBookPaginate,
   updateBookById,
+  createNewBook,
+  getBookById,
 };

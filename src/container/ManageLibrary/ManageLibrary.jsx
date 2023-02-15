@@ -6,9 +6,13 @@ import { getAllUser } from "../../services/apiServices";
 import ManageNavigation from "../Navigation/ManageNavigation";
 import { getAllBook } from "../../services/apiServices";
 import UpdateLibrary from "./UpdateLibrary";
+import CreateLibrary from "./CreateLibrary";
+import moment from "moment";
+import CONSTANT from "../../common/constant";
 const ManageLibrary = (props) => {
   const [dataBook, setBookData] = useState([]);
   const [dataUpdate, setDataUpdate] = useState({});
+  const [dataCreate, setDataCreate] = useState({});
   const [dataDelete, setDataDelete] = useState({});
 
   useEffect(() => {
@@ -17,13 +21,23 @@ const ManageLibrary = (props) => {
   const fetchBookData = async () => {
     const res = await getAllBook();
     if (res && res.EC === 0) {
-      setBookData(res.data);
+      const data = formatListBook(res?.data);
+      setBookData(data);
     }
   };
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
+  const formatListBook = (data) => {
+    const arr = data.map((item) => {
+      return {
+        ...item,
+        datePublish: moment(item.datePublish).format(CONSTANT.FORMAT_DATE),
+      };
+    });
+    return arr;
+  };
   const showModalCreateParent = () => {
     setIsModalCreateOpen(true);
   };
@@ -108,6 +122,11 @@ const ManageLibrary = (props) => {
           </Button>
         </div>
         <div className="table-list-library">
+          <CreateLibrary
+            isModalCreateOpen={isModalCreateOpen}
+            setIsModalCreateOpen={setIsModalCreateOpen}
+            fetchBookDataFromParent={fetchBookData}
+          />
           <UpdateLibrary
             isModalUpdateOpen={isModalUpdateOpen}
             setIsModalUpdateOpen={setIsModalUpdateOpen}

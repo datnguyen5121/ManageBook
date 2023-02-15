@@ -1,21 +1,21 @@
 import { Button, Form, Input, Select, Modal, notification, DatePicker } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
-import { updateBookById } from "../../services/apiServices";
 import { storage } from "../../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import moment from "moment";
 import { v4 } from "uuid";
-import "./UpdateLibrary.scss";
+import "./CreateLibrary.scss";
+import { createNewBook } from "../../services/apiServices";
+import moment from "moment";
+
 const { Option } = Select;
 
-const UpdateLibrary = (props) => {
-  const [formUpdate] = Form.useForm();
-  let { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate } = props;
+const CreateLibrary = (props) => {
+  const [formCreate] = Form.useForm();
+  let { isModalCreateOpen, setIsModalCreateOpen, datacreate } = props;
   const [preview, setPreview] = useState();
   const [selectedFile, setSelectedFile] = useState();
-  const [dateUpdate, setDateUpdate] = useState("");
-  const [datebook, setDateBook] = useState(false);
+
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined);
@@ -27,9 +27,6 @@ const UpdateLibrary = (props) => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
-  useEffect(() => {
-    dataUpdate && handleFillForm(dataUpdate);
-  }, [dataUpdate]);
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       return;
@@ -49,16 +46,15 @@ const UpdateLibrary = (props) => {
       const imgUrl = selectedFile ? await uploadImage() : preview;
       const data = {
         ...values,
-        id: dataUpdate._id,
         imgUrl: `${imgUrl}`,
       };
       console.log("data", data);
-      let res = await updateBookById(data);
+      let res = await createNewBook(data);
       if (res && res.EC === 0) {
         notification.success({
           message: "Success",
           placement: "bottomRight",
-          description: "Update Success",
+          description: "Create Success",
         });
         handleCancel();
         await props.fetchBookDataFromParent();
@@ -66,7 +62,7 @@ const UpdateLibrary = (props) => {
         notification.error({
           message: "Error",
           placement: "bottomRight",
-          description: "Update Error",
+          description: "Create Error",
         });
       }
     } catch (error) {
@@ -75,43 +71,29 @@ const UpdateLibrary = (props) => {
   };
 
   const handleCancel = () => {
-    setIsModalUpdateOpen(false);
+    setIsModalCreateOpen(false);
   };
   const onCateGoryChange = (value) => {
     console.log(value);
   };
-  const handleFillForm = (data) => {
-    formUpdate.setFieldValue("author", data.author);
-    formUpdate.setFieldValue("title", data.title);
-    formUpdate.setFieldValue("description", data.description);
-    formUpdate.setFieldValue("datePublish", moment(data.datePublish));
-    formUpdate.setFieldValue("pageNumber", data.pageNumber);
-    formUpdate.setFieldValue("category", data.category);
-    formUpdate.setFieldValue("price", data.price);
-    setPreview(data.imgUrl);
-    setDateUpdate(data.datePublish);
-  };
-  function onSelectDate(date, dateString) {
-    console.log(date, dateString);
-    setDateUpdate(dateString);
-  }
+
   return (
     <>
       <Modal
-        title="Update Book"
-        open={isModalUpdateOpen}
+        title="Create Book"
+        open={isModalCreateOpen}
         //   onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-        className="update-modal"
+        className="create-modal"
       >
-        <div style={{ fontWeight: 200, fontSize: "25px", textAlign: "center" }}>Update Book</div>
+        <div style={{ fontWeight: 200, fontSize: "25px", textAlign: "center" }}>Create Book</div>
         <Form
           style={{ paddingRight: 20, paddingLeft: 20 }}
           onFinish={(values) => handleFormSubmit(values)}
-          id="formUpdate"
-          form={formUpdate}
-          className="form-update"
+          id="formCreate"
+          form={formCreate}
+          className="form-create"
         >
           <Form.Item
             label="author"
@@ -151,18 +133,6 @@ const UpdateLibrary = (props) => {
             <Input />
           </Form.Item>
           <Form.Item
-            label="pageNumber"
-            name="pageNumber"
-            rules={[
-              {
-                required: true,
-                message: "Please input your pageNumber!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
             label="datePublish"
             name="datePublish"
             rules={[
@@ -173,6 +143,18 @@ const UpdateLibrary = (props) => {
             ]}
           >
             <DatePicker format="MM/DD/YYYY" style={{ width: "100%" }} />
+          </Form.Item>
+          <Form.Item
+            label="pageNumber"
+            name="pageNumber"
+            rules={[
+              {
+                required: true,
+                message: "Please input your pageNumber!",
+              },
+            ]}
+          >
+            <Input />
           </Form.Item>
           <div className="upload">
             <label htmlFor="file-upload" className="custom-file-upload">
@@ -216,7 +198,7 @@ const UpdateLibrary = (props) => {
             <Input />
           </Form.Item>
           <Button type="primary" htmlType="submit">
-            Update
+            Create
           </Button>
         </Form>
       </Modal>
@@ -224,4 +206,4 @@ const UpdateLibrary = (props) => {
   );
 };
 
-export default UpdateLibrary;
+export default CreateLibrary;
