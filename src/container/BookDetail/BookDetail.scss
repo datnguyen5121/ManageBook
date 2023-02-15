@@ -18,8 +18,8 @@
                     justify-content: center;
                     img{
                         image-rendering: pixelated;
-                        width: 300px;
-                        height: 300px;
+                        width: 444px;
+                        height: 444px;
                         object-fit: contain;
                     }
                 }
@@ -78,7 +78,8 @@
                 border-top: 1px solid rgb(242, 242, 242);
                 padding-top: 10px;
                 .delivery-font{
-                   
+                    font-size: 15px;
+                    line-height: 1.6;
                 }
             }
             .address-user{
@@ -99,7 +100,81 @@
                     color: rgb(11, 116, 229);
                     font-size: 15px;
                     line-height: 24px;
-                    font-weight: 400;
+                    font-weight: 500;
+                }
+            }
+            .quantity-title{
+                border-top: 1px solid rgb(242, 242, 242);
+                padding-top: 16px;
+                font-size: 15px;
+                line-height: 1.6;
+
+            }
+            .quantity-container{
+                display: flex;
+                flex-direction: row;
+                
+                button {
+                    cursor: pointer;
+                    width: 30px;
+                    background-color: rgb(255, 255, 255);
+                    border: 1px solid rgb(236, 236, 236) !important;
+                    height: 30px;
+                    font-size: 20px;
+                    text-align: center;
+                    outline: none;
+                    transition: border-color 0.15s;
+                    color: rgb(36, 36, 36);
+
+                }
+                .quantity-input{
+                    width: 34px;
+                    border: 1px solid rgb(236, 236, 236) !important;
+                    height: 26px;
+                    color: rgb(36, 36, 36);
+                    font-size: 14px;
+                    text-align: center;
+                    outline: none;
+                    transition: border-color 0.15s;
+                }
+            }
+
+            .button-group{
+                margin-top: 20px;
+                flex: 1 1 0%;
+                display: flex;
+                ;
+                .btn {
+                   width: 200px;    
+                   height: 48px;
+                   border: none;
+                   border-radius: 4px;
+                   align-items: center;
+                   font-size: 15px;
+                   line-height: 24px;
+                   -webkit-box-align: center;
+                   -webkit-box-pack: center;
+                   justify-content: center;
+                }
+                .btn-add-card{
+                    color: rgb(255, 255, 255);
+                    background-color: rgb(255, 57, 69);
+                    cursor: pointer;
+                    display: flex;
+                    min-width: 190px;
+                    max-width: 300px;
+                    height: 48px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    outline: none;
+                }
+                .btn-buy-now{
+                    border: 1px solid rgb(13, 92, 182);
+                    line-height: 1.6;
+                    color: rgb(13, 92, 182);
+                    text-transform: unset;
+                    background: white;
+                    margin-left: 12px;
                 }
             }
           }

@@ -12,7 +12,7 @@ const BookDetail = () => {
   const quizId = params.id;
   const [detailbook, setDetailBook] = useState([]);
   const account = useSelector((state) => state.user.account);
-
+  const [quantity, setQuantity] = useState(0);
   console.log(quizId);
   useEffect(() => {
     fetchBookDetail(quizId);
@@ -31,6 +31,14 @@ const BookDetail = () => {
       });
     }
   };
+  const decreaseQuantity = (value) => {
+    console.log(value);
+    setQuantity(value - 1);
+  };
+  const increaseQuantity = (value) => {
+    console.log(value);
+    setQuantity(value + 1);
+  };
   console.log(account);
   return (
     <>
@@ -45,7 +53,7 @@ const BookDetail = () => {
           <div className="bookdetail-border"></div>
           <div className="bookdetail-content-right">
             <div className="content-1">
-              <div className="bookdetail-author">{detailbook.author}</div>
+              <div className="bookdetail-author">Tác giả: {detailbook.author}</div>
               <div className="bookdetail-title">{detailbook.title}</div>
               <div className="bookdetail-price">
                 <div className="price-font">{detailbook.price}$</div>
@@ -59,6 +67,16 @@ const BookDetail = () => {
                 <div className="change-address" onClick={() => navigate("/manage-user")}>
                   Thay đổi địa chỉ
                 </div>
+              </div>
+              <div className="quantity-title">Số Lượng</div>
+              <div className="quantity-container">
+                <button onClick={() => quantity > 0 && decreaseQuantity(quantity)}>-</button>
+                <input className="quantity-input" value={quantity}></input>
+                <button onClick={() => increaseQuantity(quantity)}>+</button>
+              </div>
+              <div className="button-group">
+                <button className="btn btn-add-card">Thêm vào giỏ hàng</button>
+                <button className="btn btn-buy-now">Mua luôn</button>
               </div>
             </div>
             <div className="content-2"></div>
