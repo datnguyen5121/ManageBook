@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import Router from "./Router";
+import ManageNavigation from "./container/Navigation/ManageNavigation";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <PersistGate loading={null} persistor={persistor}>
       {/* <React.StrictMode> */}
       <BrowserRouter>
+        <ManageNavigation />
         <Router />
       </BrowserRouter>
       {/* </React.StrictMode> */}

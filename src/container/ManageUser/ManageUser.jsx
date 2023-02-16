@@ -7,7 +7,7 @@ const ManageUser = () => {
   const account = useSelector((state) => state.user.account);
   return (
     <>
-      <ManageNavigation />
+      {/* <ManageNavigation /> */}
       <div className="manage-user-container">
         <Descriptions title="User Info" bordered size="small">
           <Descriptions.Item label="Email" span={2}>

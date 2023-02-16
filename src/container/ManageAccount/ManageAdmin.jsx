@@ -93,7 +93,7 @@ const ManageAdmin = (props) => {
   return (
     <>
       <div className="manage-admin-container">
-        <ManageNavigation />
+        {/* <ManageNavigation /> */}
         <div className="button-crud-user">
           <Button type="primary" onClick={showModalCreateParent}>
             Create New User By ADMIN

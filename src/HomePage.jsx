@@ -6,7 +6,7 @@ import ManageNavigation from "./container/Navigation/ManageNavigation";
 const HomePage = (props) => {
   return (
     <>
-      <ManageNavigation />
+      {/* <ManageNavigation /> */}
       <div className="homepage-container">
         <div className="left-content-homepage"></div>
         <div className="right-content-homepage">

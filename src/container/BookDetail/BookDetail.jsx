@@ -42,7 +42,7 @@ const BookDetail = () => {
   console.log(account);
   return (
     <>
-      <ManageNavigation />
+      {/* <ManageNavigation /> */}
       <div className="book-detail-container">
         <div className="book-detail-content">
           <div className="bookdetail-content-left">

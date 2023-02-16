@@ -115,7 +115,7 @@ const ManageLibrary = (props) => {
   return (
     <>
       <div className="manage-library-container">
-        <ManageNavigation />
+        {/* <ManageNavigation /> */}
         <div className="button-crud-user">
           <Button type="primary" onClick={showModalCreateParent}>
             Create Book By ADMIN

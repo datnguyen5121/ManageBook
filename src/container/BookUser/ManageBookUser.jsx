@@ -5,9 +5,7 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 const ManageBookUser = () => {
   return (
     <>
-      <div className="manage-book-navigate">
-        <ManageNavigation />
-      </div>
+      <div className="manage-book-navigate">{/* <ManageNavigation /> */}</div>
       <div className="manage-book-user-container">
         <ListBook />
       </div>
