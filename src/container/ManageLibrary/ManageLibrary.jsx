@@ -1,5 +1,5 @@
 import "./ManageLibrary.scss";
-import { Space, Table } from "antd";
+import { Space, Table, Tooltip } from "antd";
 import { Button, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { getAllUser } from "../../services/apiServices";
@@ -57,23 +57,33 @@ const ManageLibrary = (props) => {
       title: "author",
       dataIndex: "author",
       key: "author",
-      width: 10,
+      width: 20,
     },
     {
       title: "Title",
       dataIndex: "title",
       key: "title",
-      width: 200,
+      width: 20,
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
+      width: 20,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (description) => (
+        <Tooltip placement="topLeft" title={description}>
+          {description}
+        </Tooltip>
+      ),
     },
     {
       title: "datePublish",
       key: "datePublish",
       dataIndex: "datePublish",
+      width: 20,
     },
     {
       title: "pageNumber",
@@ -85,19 +95,27 @@ const ManageLibrary = (props) => {
       title: "category",
       key: "category",
       dataIndex: "category",
-      width: 50,
+      width: 20,
     },
     {
       title: "imgUrl",
       key: "imgUrl",
       dataIndex: "imgUrl",
-      width: 50,
+      width: 20,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (address) => (
+        <Tooltip placement="topLeft" title={address}>
+          {address}
+        </Tooltip>
+      ),
     },
     {
       title: "price($)",
       key: "price",
       dataIndex: "price",
-      width: 25,
+      width: 10,
     },
     {
       title: "Action",
@@ -108,7 +126,7 @@ const ManageLibrary = (props) => {
           <a onClick={() => showModalDeleteParent(record)}>Delete</a>
         </Space>
       ),
-      width: 50,
+      width: 20,
     },
   ];
 

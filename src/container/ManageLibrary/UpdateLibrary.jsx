@@ -8,7 +8,7 @@ import moment from "moment";
 import { v4 } from "uuid";
 import "./UpdateLibrary.scss";
 const { Option } = Select;
-
+const { TextArea } = Input;
 const UpdateLibrary = (props) => {
   const [formUpdate] = Form.useForm();
   let { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate } = props;
@@ -16,6 +16,7 @@ const UpdateLibrary = (props) => {
   const [selectedFile, setSelectedFile] = useState();
   const [dateUpdate, setDateUpdate] = useState("");
   const [datebook, setDateBook] = useState(false);
+  // const [description, setDescription] = useState("");
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined);
@@ -84,6 +85,7 @@ const UpdateLibrary = (props) => {
     formUpdate.setFieldValue("author", data.author);
     formUpdate.setFieldValue("title", data.title);
     formUpdate.setFieldValue("description", data.description);
+    // setDescription(data.description);
     formUpdate.setFieldValue("datePublish", moment(data.datePublish));
     formUpdate.setFieldValue("pageNumber", data.pageNumber);
     formUpdate.setFieldValue("category", data.category);
@@ -148,7 +150,11 @@ const UpdateLibrary = (props) => {
               },
             ]}
           >
-            <Input />
+            <TextArea
+              rows={4}
+              // value={description}
+              // onChange={(e) => setDescription(e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             label="pageNumber"

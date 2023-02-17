@@ -36,7 +36,7 @@ const items = [
     ],
   },
   {
-    label: "Bảng Xếp Hạng",
+    label: "Top Trending",
     key: "rank",
     icon: <HeartOutlined />,
   },
@@ -54,7 +54,7 @@ const items = [
       </a>
     ),
     icon: <ShoppingCartOutlined />,
-    key: "alipay",
+    key: "cart",
   },
   {
     label: "Tài khoản",
@@ -78,7 +78,7 @@ const items = [
           },
           {
             label: "Đăng xuất",
-            key: "nguyen",
+            key: "/log-out",
           },
         ],
       },

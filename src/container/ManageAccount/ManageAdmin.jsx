@@ -1,6 +1,6 @@
 import "./ManageAdmin.scss";
 import { Space, Table } from "antd";
-import { Button, Modal } from "antd";
+import { Button, Modal, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { getAllUser } from "../../services/apiServices";
 import CreateAccount from "./CreateAccount";
@@ -44,39 +44,75 @@ const ManageAdmin = (props) => {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: 50,
+      width: 10,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (email) => (
+        <Tooltip placement="topLeft" title={email}>
+          {email}
+        </Tooltip>
+      ),
     },
     {
       title: "Password",
       dataIndex: "password",
       key: "password",
-      width: 50,
+      width: 20,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (password) => (
+        <Tooltip placement="topLeft" title={password}>
+          {password}
+        </Tooltip>
+      ),
     },
     {
       title: "firstName",
       dataIndex: "firstName",
       key: "firstName",
+      width: 10,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (address) => (
+        <Tooltip placement="topLeft" title={address}>
+          {address}
+        </Tooltip>
+      ),
     },
     {
       title: "lastName",
       key: "lastName",
       dataIndex: "lastName",
-      width: 50,
+      width: 10,
     },
     {
       title: "Address",
       key: "address",
       dataIndex: "address",
+      width: 10,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (address) => (
+        <Tooltip placement="topLeft" title={address}>
+          {address}
+        </Tooltip>
+      ),
     },
     {
       title: "gender",
       key: "gender",
       dataIndex: "gender",
+      width: 10,
     },
     {
       title: "Role",
       key: "roleId",
       dataIndex: "roleId",
+      width: 10,
     },
     {
       title: "Action",
@@ -87,6 +123,7 @@ const ManageAdmin = (props) => {
           <a onClick={() => showModalDeleteParent(record)}>Delete</a>
         </Space>
       ),
+      width: 10,
     },
   ];
 
