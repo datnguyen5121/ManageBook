@@ -6,17 +6,20 @@ import { getBookById } from "../../services/apiServices";
 import { notification } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 const BookDetail = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const quizId = params.id;
-  const [detailbook, setDetailBook] = useState([]);
+  const [detailbook, setDetailBook] = useState({});
   const account = useSelector((state) => state.user.account);
   const [quantity, setQuantity] = useState(0);
   console.log(quizId);
   useEffect(() => {
     fetchBookDetail(quizId);
   }, []);
+
   const fetchBookDetail = async (inputId) => {
     try {
       let res = await getBookById(inputId);
@@ -36,10 +39,21 @@ const BookDetail = () => {
     setQuantity(value - 1);
   };
   const increaseQuantity = (value) => {
-    console.log(value);
     setQuantity(value + 1);
   };
   console.log(account);
+  const handLeAddToCart = () => {
+    let payload = {
+      bookId: detailbook._id,
+      author: detailbook.author,
+      title: detailbook.title,
+      category: detailbook.category,
+      imgUrl: detailbook.imgUrl,
+      price: detailbook.price,
+      quantity: quantity,
+    };
+    // dispatch(addBook(payload));
+  };
   return (
     <>
       {/* <ManageNavigation /> */}
@@ -75,7 +89,9 @@ const BookDetail = () => {
                 <button onClick={() => increaseQuantity(quantity)}>+</button>
               </div>
               <div className="button-group">
-                <button className="btn btn-add-card">Thêm vào giỏ hàng</button>
+                <button className="btn btn-add-card" onClick={handLeAddToCart}>
+                  Thêm vào giỏ hàng
+                </button>
                 <button className="btn btn-buy-now">Mua luôn</button>
               </div>
             </div>

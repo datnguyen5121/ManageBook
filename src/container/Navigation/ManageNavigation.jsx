@@ -36,7 +36,7 @@ const items = [
     ],
   },
   {
-    label: "Top Trending",
+    label: <span>Top Trending</span>,
     key: "rank",
     icon: <HeartOutlined />,
   },
@@ -48,13 +48,9 @@ const items = [
   },
 
   {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Giỏ hàng
-      </a>
-    ),
+    label: <span>Giỏ hàng</span>,
     icon: <ShoppingCartOutlined />,
-    key: "cart",
+    key: "/cart",
   },
   {
     label: "Tài khoản",
