@@ -30,7 +30,7 @@ export const getAll = (email) => {
     });
   };
 };
-
+export const addBookIntoCart = () => {};
 export const updateQuantityCart = (bookId, quantity) => {
   console.log("data", bookId, quantity);
   return async (dispatch, getState) => {
@@ -45,6 +45,22 @@ export const updateQuantityCart = (bookId, quantity) => {
     dispatch({
       type: ADD_TO_CART,
       payload: arr,
+    });
+  };
+};
+
+export const removeCart = (data) => {
+  return async (dispatch, getState) => {
+    console.log("hieu", data);
+    let res = await deleteCart(data);
+    console.log("res", res);
+    let arr = [...getState().cart.listBooks];
+    let newArr = arr.filter((item) => {
+      return item.bookId !== data.bookId;
+    });
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: newArr,
     });
   };
 };

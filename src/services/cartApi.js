@@ -10,7 +10,8 @@ const deleteAllCart = () => {
   return axios.delete(`/api/delete-all-cart`);
 };
 const deleteCart = (data) => {
-  return axios.delete(`/api/delete-cart`, data);
+  console.log("axios data", data);
+  return axios.delete("/api/delete-cart", { data });
 };
 const updateCartById = (bookId, quantity) => {
   return axios.post(`/api/update-cart-by-id`, { bookId, quantity });

@@ -5,8 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import Router from "./Router";
-import ManageNavigation from "./container/Navigation/ManageNavigation";
-
+import ManageNavigation from "./component/Navigation/ManageNavigation";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

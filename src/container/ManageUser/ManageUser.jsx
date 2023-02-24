@@ -1,4 +1,3 @@
-import ManageNavigation from "../Navigation/ManageNavigation";
 import { Descriptions } from "antd";
 import "./ManageUser.scss";
 import { useSelector } from "react-redux";
@@ -7,7 +6,6 @@ const ManageUser = () => {
   const account = useSelector((state) => state.user.account);
   return (
     <>
-      {/* <ManageNavigation /> */}
       <div className="manage-user-container">
         <Descriptions title="User Info" bordered size="small">
           <Descriptions.Item label="Email" span={2}>

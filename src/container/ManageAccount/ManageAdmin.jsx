@@ -6,7 +6,6 @@ import { getAllUser } from "../../services/apiServices";
 import CreateAccount from "./CreateAccount";
 import UpdateAccount from "./UpdateAccount";
 import DeleteAccount from "./DeleteAccount";
-import ManageNavigation from "../Navigation/ManageNavigation";
 const ManageAdmin = (props) => {
   const [listUser, setListUser] = useState([]);
   const [dataUpdate, setDataUpdate] = useState({});
@@ -130,7 +129,6 @@ const ManageAdmin = (props) => {
   return (
     <>
       <div className="manage-admin-container">
-        {/* <ManageNavigation /> */}
         <div className="button-crud-user">
           <Button type="primary" onClick={showModalCreateParent}>
             Create New User By ADMIN

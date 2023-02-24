@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { getAll } from "../../redux/action/cartAction";
+import { getAll, removeCart } from "../../redux/action/cartAction";
 import { useSelector } from "react-redux";
 import { updateCartById } from "../../services/cartApi";
 import { updateQuantityCart } from "../../redux/action/cartAction";
@@ -27,6 +27,13 @@ const Cart = () => {
   const handleQuantityIncrease = (bookId, quantity) => {
     let quantityInput = +quantity + 1;
     dispatch(updateQuantityCart(bookId, quantityInput));
+  };
+  const handleRemoveCart = (bookId) => {
+    const data = {
+      email: email,
+      bookId: bookId,
+    };
+    dispatch(removeCart(data));
   };
   return (
     <>
@@ -85,7 +92,9 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="cart-price-payment">{item.quantity * item.price}</div>
-                    <div className="cart-control">Xoá</div>
+                    <div className="cart-control" onClick={() => handleRemoveCart(item.bookId)}>
+                      Xoá
+                    </div>
                   </div>
                 </>
               );

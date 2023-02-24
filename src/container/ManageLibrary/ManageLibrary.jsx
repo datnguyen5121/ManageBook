@@ -3,7 +3,6 @@ import { Space, Table, Tooltip } from "antd";
 import { Button, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { getAllUser } from "../../services/apiServices";
-import ManageNavigation from "../Navigation/ManageNavigation";
 import { getAllBook } from "../../services/apiServices";
 import UpdateLibrary from "./UpdateLibrary";
 import CreateLibrary from "./CreateLibrary";
@@ -133,7 +132,6 @@ const ManageLibrary = (props) => {
   return (
     <>
       <div className="manage-library-container">
-        {/* <ManageNavigation /> */}
         <div className="button-crud-user">
           <Button type="primary" onClick={showModalCreateParent}>
             Create Book By ADMIN

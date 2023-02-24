@@ -1,5 +1,4 @@
 import "./BookDetail.scss";
-import ManageNavigation from "../Navigation/ManageNavigation";
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getBookById } from "../../services/apiServices";
@@ -56,7 +55,6 @@ const BookDetail = () => {
   };
   return (
     <>
-      {/* <ManageNavigation /> */}
       <div className="book-detail-container">
         <div className="book-detail-content">
           <div className="bookdetail-content-left">
