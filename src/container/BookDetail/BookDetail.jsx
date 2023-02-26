@@ -6,6 +6,8 @@ import { notification } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { AddUpdateCart } from "../../services/cartApi";
+import { addBookIntoCart } from "../../redux/action/cartAction";
 const BookDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,14 +46,18 @@ const BookDetail = () => {
   const handLeAddToCart = () => {
     let payload = {
       bookId: detailbook._id,
-      author: detailbook.author,
       title: detailbook.title,
       category: detailbook.category,
       imgUrl: detailbook.imgUrl,
       price: detailbook.price,
       quantity: quantity,
+      email: account.email,
     };
-    // dispatch(addBook(payload));
+    dispatch(addBookIntoCart(payload));
+  };
+  const handleChangeQuantity = (event) => {
+    console.log(typeof +event.target.value);
+    setQuantity(+event.target.value);
   };
   return (
     <>
@@ -83,7 +89,11 @@ const BookDetail = () => {
               <div className="quantity-title">Số Lượng</div>
               <div className="quantity-container">
                 <button onClick={() => quantity > 0 && decreaseQuantity(quantity)}>-</button>
-                <input className="quantity-input" value={quantity}></input>
+                <input
+                  className="quantity-input"
+                  value={quantity}
+                  onChange={handleChangeQuantity}
+                ></input>
                 <button onClick={() => increaseQuantity(quantity)}>+</button>
               </div>
               <div className="button-group">

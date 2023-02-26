@@ -35,12 +35,13 @@ const Cart = () => {
     };
     dispatch(removeCart(data));
   };
+
   return (
     <>
       <div className="cart-container">
         <div className="cart-thead">
           <div className="cart-thead-check-all">
-            <label className="thdead-checkbox" for="accept">
+            <label className="thdead-checkbox" htmlFor="accept">
               <input type="checkbox" id="checkbox" hidden />
               <div
                 className={check ? "checkbox-box checked" : "checkbox-box"}
@@ -62,7 +63,7 @@ const Cart = () => {
                 <>
                   <div className="cart-product" key={item.bookId}>
                     <div className="cart-tbody-check-all">
-                      <label className="thdead-checkbox" for="accept">
+                      <label className="thdead-checkbox" htmlFor="accept">
                         <input type="checkbox" id="checkbox" hidden />
                         <div
                           className={check ? "checkbox-box checked" : "checkbox-box"}
@@ -85,7 +86,12 @@ const Cart = () => {
                         <button onClick={() => handleQuantityDecrease(item.bookId, item.quantity)}>
                           -
                         </button>
-                        <input className="quantity-input" value={item.quantity}></input>
+                        <input
+                          className="quantity-input"
+                          value={item.quantity}
+                          // disabled={true}
+                          // onChange={handleChangeQuantity}
+                        ></input>
                         <button onClick={() => handleQuantityIncrease(item.bookId, item.quantity)}>
                           +
                         </button>

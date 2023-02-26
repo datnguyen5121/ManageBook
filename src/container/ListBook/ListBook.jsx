@@ -35,7 +35,7 @@ const ListBook = () => {
     <>
       <div className="listbook-container-scroll">
         <div className="listbook-container">
-          {listBook?.map((item) => {
+          {listBook?.map((item, index) => {
             return (
               <Card
                 hoverable
@@ -43,6 +43,7 @@ const ListBook = () => {
                   width: 200,
                   height: 333,
                 }}
+                key={`cart-${index}`}
                 cover={<img alt="example" src={item.imgUrl} className="img-content" />}
                 className="card-container"
                 onClick={() => navigate(`/detail-book/${item._id}`)}

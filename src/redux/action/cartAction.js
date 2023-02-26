@@ -3,9 +3,12 @@ import { AddUpdateCart } from "../../services/cartApi";
 import { deleteAllCart } from "../../services/cartApi";
 import { deleteCart } from "../../services/cartApi";
 import { updateCartById } from "../../services/cartApi";
+import { notification } from "antd";
 import cartReducer from "../reducer/cartReducer";
 export const GET_ALL_CART = "GET_ALL_CART";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const ADD_BOOK_TO_CART = "ADD_BOOK_TO_CART";
+
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const getAll = (email) => {
@@ -30,7 +33,40 @@ export const getAll = (email) => {
     });
   };
 };
-export const addBookIntoCart = () => {};
+export const addBookIntoCart = (data) => {
+  return async (dispatch, getState) => {
+    let res = await AddUpdateCart({
+      email: data.email,
+      bookId: data.bookId,
+      quantity: data.quantity,
+    });
+    if (res && res.errCode === 0) {
+      notification.success({
+        message: "Success",
+        placement: "bottomRight",
+        description: "Add Book Into Cart Success",
+      });
+    } else {
+      notification.error({
+        message: "Error",
+        placement: "bottomRight",
+        description: "Add Book Into Cart Error",
+      });
+    }
+
+    let arr = [...getState().cart.listBooks];
+    console.log("arr", arr);
+    arr.forEach((book) => {
+      if (book.bookId === data.bookId && book.quantity && data.quantity) {
+        book.quantity += data.quantity;
+      }
+    });
+    dispatch({
+      type: ADD_BOOK_TO_CART,
+      payload: arr,
+    });
+  };
+};
 export const updateQuantityCart = (bookId, quantity) => {
   console.log("data", bookId, quantity);
   return async (dispatch, getState) => {
