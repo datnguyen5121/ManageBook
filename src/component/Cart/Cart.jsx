@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { getAll, removeCart } from "../../redux/action/cartAction";
+import { clickAllBook, clickBook, getAll, removeCart } from "../../redux/action/cartAction";
 import { useSelector } from "react-redux";
 import { updateCartById } from "../../services/cartApi";
 import { updateQuantityCart } from "../../redux/action/cartAction";
@@ -8,18 +8,19 @@ import { useEffect, useState } from "react";
 const Cart = () => {
   const account = useSelector((state) => state.user.account);
   const listBooks = useSelector((state) => state.cart.listBooks);
-
+  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
   const [check, setCheck] = useState(false);
   let email = account.email;
   useEffect(() => {
     dispatch(getAll(email));
   }, []);
-
-  const handleCheck = () => {
-    setCheck(!check);
+  useEffect(() => {
+    handleTotalPayment();
+  }, [listBooks]);
+  const handleCheck = (item) => {
+    dispatch(clickBook(item.bookId));
   };
-
   const handleQuantityDecrease = (bookId, quantity) => {
     let quantityInput = +quantity - 1;
     dispatch(updateQuantityCart(bookId, quantityInput));
@@ -35,7 +36,23 @@ const Cart = () => {
     };
     dispatch(removeCart(data));
   };
-
+  const handleClickAll = () => {
+    setCheck(!check);
+    console.log("check", check);
+    dispatch(clickAllBook(check));
+  };
+  const handleTotalPayment = () => {
+    let a = listBooks.filter((item) => {
+      return item && item.checked === true;
+    });
+    let b = 0;
+    for (let i = 0; i < a.length; i++) {
+      b += a[i].price * a[i].quantity;
+    }
+    // console.log(a);
+    console.log("total", b);
+    setTotal(b);
+  };
   return (
     <>
       <div className="cart-container">
@@ -46,7 +63,7 @@ const Cart = () => {
               <div
                 className={check ? "checkbox-box checked" : "checkbox-box"}
                 htmlFor="checkbox"
-                onClick={handleCheck}
+                onClick={handleClickAll}
               ></div>
             </label>
           </div>
@@ -58,17 +75,21 @@ const Cart = () => {
         </div>
         <div className="cart-tbody">
           {listBooks && listBooks.length > 0 ? (
-            listBooks.map((item) => {
+            listBooks.map((item, index) => {
               return (
                 <>
                   <div className="cart-product" key={item.bookId}>
                     <div className="cart-tbody-check-all">
                       <label className="thdead-checkbox" htmlFor="accept">
-                        <input type="checkbox" id="checkbox" hidden />
+                        <input type="checkbox" checked={item.checked} hidden />
                         <div
-                          className={check ? "checkbox-box checked" : "checkbox-box"}
+                          className={
+                            item.checked === true ? "checkbox-box checked" : "checkbox-box"
+                          }
                           htmlFor="checkbox"
-                          onClick={handleCheck}
+                          onClick={() => {
+                            handleCheck(item);
+                          }}
                         ></div>
                       </label>
                     </div>
@@ -116,7 +137,7 @@ const Cart = () => {
               <div className="cart-voucher-enter">Nhập mã giảm giá</div>
             </div>
             <div className="cart-pay">
-              <div className="cart-payment-price">200 $</div>
+              <div className="cart-payment-price">{total}</div>
               <div className="cart-payment-buy">
                 <button>
                   <label>Mua hàng</label>

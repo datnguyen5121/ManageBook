@@ -8,14 +8,14 @@ import cartReducer from "../reducer/cartReducer";
 export const GET_ALL_CART = "GET_ALL_CART";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_BOOK_TO_CART = "ADD_BOOK_TO_CART";
-
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const PICK_BOOK_TO_BUY = "PICK_BOOK_TO_BUY";
+export const PICK_ALL = "PICK_ALL";
+
 export const getAll = (email) => {
   return async (dispatch, getState) => {
-    console.log("email", email);
     const arrBook = await getAllCart(email);
-    console.log(arrBook);
     const listBooks = arrBook.data.map((book) => {
       return {
         quantity: book?.quantity,
@@ -24,9 +24,9 @@ export const getAll = (email) => {
         imgUrl: book?.bookId?.imgUrl,
         price: book?.bookId?.price,
         title: book?.bookId?.title,
+        checked: false,
       };
     });
-    console.log("listbook", listBooks);
     dispatch({
       type: GET_ALL_CART,
       payload: listBooks,
@@ -40,7 +40,7 @@ export const addBookIntoCart = (data) => {
       bookId: data.bookId,
       quantity: data.quantity,
     });
-    if (res && res.errCode === 0) {
+    if (res && res.EC === 0) {
       notification.success({
         message: "Success",
         placement: "bottomRight",
@@ -97,6 +97,45 @@ export const removeCart = (data) => {
     dispatch({
       type: REMOVE_FROM_CART,
       payload: newArr,
+    });
+  };
+};
+
+export const removeAllCart = () => {
+  return {
+    type: REMOVE_ALL_FROM_CART,
+  };
+};
+export const clickBook = (bookId) => {
+  return async (dispatch, getState) => {
+    let arr = [...getState().cart.listBooks];
+    // console.log("arr", arr);
+    // console.log("bookId", bookId);
+    arr.forEach((book) => {
+      if (book.bookId === bookId) {
+        book.checked = !book.checked;
+      }
+    });
+    dispatch({
+      type: PICK_BOOK_TO_BUY,
+      payload: arr,
+    });
+  };
+};
+export const clickAllBook = (isAll) => {
+  return async (dispatch, getState) => {
+    let arr = [...getState().cart.listBooks];
+    arr.forEach((book) => {
+      if (isAll === false) {
+        book.checked = true;
+      }
+      if (isAll === true) {
+        book.checked = false;
+      }
+    });
+    dispatch({
+      type: PICK_ALL,
+      payload: arr,
     });
   };
 };

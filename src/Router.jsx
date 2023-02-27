@@ -9,24 +9,73 @@ import ManageUser from "./container/ManageUser/ManageUser";
 import { notification } from "antd";
 import BookDetail from "./container/BookDetail/BookDetail";
 import Cart from "./component/Cart/Cart";
+import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
+import ManageNavigation from "./component/Navigation/ManageNavigation";
+import Layout from "./Layout";
 const Router = (props) => {
   const [api, contextHolder] = notification.useNotification();
   return (
     <>
       {contextHolder}
+      {/* <Layout> */}
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
         </Route>
-        <Route path="/manage-book-user" element={<ManageBookUser />} />
-        <Route path="/manage-account" element={<AccountPage />}>
-          <Route index element={<ManageAdmin />} />
+        <Route element={<Layout />}>
+          <Route
+            path="/manage-book-user"
+            element={
+              <PrivateRoute>
+                <ManageBookUser />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manage-account"
+            element={
+              <PrivateRoute>
+                <AccountPage />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<ManageAdmin />} />
+          </Route>
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoute>
+                <Cart />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manage-library"
+            element={
+              <PrivateRoute>
+                <ManageLibrary />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manage-user"
+            element={
+              <PrivateRoute>
+                <ManageUser />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/detail-book/:id"
+            element={
+              <PrivateRoute>
+                <BookDetail />
+              </PrivateRoute>
+            }
+          />
         </Route>
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/manage-library" element={<ManageLibrary />} />
-        <Route path="/manage-user" element={<ManageUser />} />
-        <Route path="/detail-book/:id" element={<BookDetail />} />
       </Routes>
+      {/* </Layout> */}
     </>
   );
 };

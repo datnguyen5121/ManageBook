@@ -39,6 +39,11 @@ instance.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     // const status = (error && error.response && error.response.status) || 500;
+
+    if (error.response.data && error.response.data.EC === -999) {
+      window.location.href = "/";
+    }
+
     const status = error;
 
     console.log(status);

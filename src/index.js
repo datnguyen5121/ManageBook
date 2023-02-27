@@ -12,7 +12,6 @@ root.render(
     <PersistGate loading={null} persistor={persistor}>
       {/* <React.StrictMode> */}
       <BrowserRouter>
-        <ManageNavigation />
         <Router />
       </BrowserRouter>
       {/* </React.StrictMode> */}

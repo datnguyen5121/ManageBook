@@ -167,6 +167,10 @@
                     font-weight: 500;
                     text-transform: capitalize;
                     outline: none;
+
+                    &:hover{
+                        opacity: 0.5;
+                    }
                 }
                 .btn-buy-now{
                     border: 1px solid rgb(13, 92, 182);

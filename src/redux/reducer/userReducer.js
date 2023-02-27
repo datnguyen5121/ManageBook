@@ -1,4 +1,5 @@
 import { FETCH_USER_LOGIN_SUCCESS } from "../action/userAction";
+import { LOGOUT_SUCCESS } from "../action/userAction";
 const INITIAL_STATE = {
   account: {
     access_token: "",
@@ -31,6 +32,23 @@ const userReducer = (state = INITIAL_STATE, action) => {
           roleId: action?.payload?.DT?.infoUser?.roleId,
         },
         isAuthenticated: true,
+      };
+    case LOGOUT_SUCCESS:
+      console.log("check action user", action);
+      return {
+        ...state,
+        account: {
+          access_token: "",
+          refresh_token: "",
+          email: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+          address: "",
+          gender: "",
+          roleId: "",
+        },
+        isAuthenticated: false,
       };
 
     default:

@@ -53,7 +53,15 @@ const BookDetail = () => {
       quantity: quantity,
       email: account.email,
     };
-    dispatch(addBookIntoCart(payload));
+    if (quantity === 0) {
+      notification.error({
+        message: "Error",
+        placement: "bottomRight",
+        description: "You must add quantity !",
+      });
+    } else {
+      dispatch(addBookIntoCart(payload));
+    }
   };
   const handleChangeQuantity = (event) => {
     console.log(typeof +event.target.value);
