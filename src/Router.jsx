@@ -12,7 +12,7 @@ import Cart from "./component/Cart/Cart";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 import ManageNavigation from "./component/Navigation/ManageNavigation";
 import Layout from "./Layout";
-import ListBookCateGory from "./container/ListBook/ListBookCateGory";
+import ListBookSearch from "./container/ListBook/ListBookSearch";
 const Router = (props) => {
   const [api, contextHolder] = notification.useNotification();
   return (
@@ -67,10 +67,10 @@ const Router = (props) => {
             }
           />
           <Route
-            path="list-book-category"
+            path="list-book-search"
             element={
               <PrivateRoute>
-                <ListBookCateGory />
+                <ListBookSearch />
               </PrivateRoute>
             }
           />

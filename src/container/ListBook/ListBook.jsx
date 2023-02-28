@@ -2,32 +2,57 @@ import { useEffect, useState } from "react";
 import { getAllBook } from "../../services/apiServices";
 import { getBookPaginate } from "../../services/apiServices";
 import { getBookPaginateCateGory } from "../../services/apiServices";
+import { getBookPaginateSearch } from "../../services/apiServices";
 import React from "react";
 import { Card, Form, Select } from "antd";
 import { Pagination } from "antd";
 import "./ListBook.scss";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { doSearch } from "../../redux/action/bookAction";
 const { Meta } = Card;
 const { Option } = Select;
 
-const ListBook = () => {
-  const [listBook, SetListBook] = useState([]);
+const ListBook = (props) => {
+  const [listBook, setListBook] = useState([]);
+  const [listBookPage, setListBookPage] = useState([]);
+
   const [pageBookNumber, SetPageBookNumber] = useState(1);
   const [totalBook, setTotalBook] = useState("");
   const [category, setCategory] = useState("");
+  const { valueText } = props;
+  const [textSearch, setTextSearch] = useState(valueText);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchBookList();
   }, [pageBookNumber]);
   useEffect(() => {
     fetchBookListCateGory();
   }, [category]);
+
+  useEffect(() => {
+    if (valueText) {
+      fetchBookSearch();
+      dispatch(doSearch(""));
+    }
+  }, [valueText]);
+
+  const fetchBookSearch = async () => {
+    let res = await getBookPaginateSearch(10, pageBookNumber, valueText);
+    console.log("res", res);
+    if (res && res.EC === 0) {
+      setListBook(res.data.listBook);
+      setListBookPage(res.data.listBook);
+      setTotalBook(res.data.total);
+      setCategory("");
+    }
+  };
   const fetchBookList = async () => {
     let res = await getBookPaginate(10, pageBookNumber);
     console.log(res.data);
     if (res && res.EC === 0) {
-      SetListBook(res.data.listBook);
+      setListBook(res.data.listBook);
       setTotalBook(res.data.totalBook);
     }
   };
@@ -45,11 +70,11 @@ const ListBook = () => {
       let res = await getBookPaginateCateGory(10, pageBookNumber, category);
       console.log(res.data);
       if (res && res.EC === 0) {
-        SetListBook(res.data.listBook);
+        setListBook(res.data.listBook);
         setTotalBook(res.data.total);
       }
     } else {
-      fetchBookList();
+      await fetchBookList();
     }
   };
   return (

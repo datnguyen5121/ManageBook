@@ -60,6 +60,11 @@ const getBookPaginateCateGory = (perPage, page, category) => {
     `/api/get-book-paginate-type?page=${page}&limit=${perPage}&category=${category}`,
   );
 };
+const getBookPaginateSearch = (perPage, page, valueText) => {
+  return axios.get(
+    `/api/get-book-paginate-search?page=${page}&limit=${perPage}&valueText=${valueText}`,
+  );
+};
 const getBookById = (id) => {
   return axios.get(`/api/get-book-by-id?_id=${id}`);
 };
@@ -105,4 +110,5 @@ export {
   createNewBook,
   getBookPaginateCateGory,
   getBookById,
+  getBookPaginateSearch,
 };

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import "./Search.scss";
-const Search = () => {
-  const [valueText, setValueText] = useState("");
-  const handleBtnSearch = () => {
-    console.log(valueText);
+import { useDispatch } from "react-redux";
+import { doSearch } from "../../redux/action/bookAction";
+const Search = (props) => {
+  const dispatch = useDispatch();
+  const { valueText, setValueText } = props;
+  const handleSearch = () => {
+    props.handleBtnSearch();
   };
   return (
     <>
@@ -14,7 +17,7 @@ const Search = () => {
           value={valueText}
           onChange={(event) => setValueText(event.target.value)}
         ></input>
-        <div className="btn-search" onClick={handleBtnSearch}>
+        <div className="btn-search" onClick={handleSearch}>
           <BsSearch />
         </div>
       </div>

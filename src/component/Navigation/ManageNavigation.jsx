@@ -8,12 +8,13 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { doLogout } from "../../redux/action/userAction";
 import { removeAllCart } from "../../redux/action/cartAction";
 import { FaReact } from "react-icons/fa";
 import Search from "../search/Search";
+import { doSearch } from "../../redux/action/bookAction";
 const ManageNavigation = () => {
   const dispatch = useDispatch();
 
@@ -24,11 +25,25 @@ const ManageNavigation = () => {
     navigate(e.key);
     setCurrentUrl(e.key);
   };
+  const [valueText, setValueText] = useState("");
+  const handleBtnSearch = () => {
+    console.log(valueText);
+    dispatch(doSearch(valueText));
+    // setValueText("");
+  };
   const items = [
     {
-      label: "Home",
+      label: (
+        <span
+          onClick={() => {
+            setValueText("");
+            // window.location.reload();
+          }}
+        >
+          <HomeOutlined /> Home
+        </span>
+      ),
       key: "/manage-book-user",
-      icon: <HomeOutlined />,
     },
 
     {
@@ -93,7 +108,7 @@ const ManageNavigation = () => {
           <div className="brand-title">Datnguyen</div>
         </NavLink>
       </div>
-      <Search />
+      <Search valueText={valueText} handleBtnSearch={handleBtnSearch} setValueText={setValueText} />
       <Menu onClick={onClick} selectedKeys={[currentUrl]} mode="horizontal" items={items} />
     </div>
   );

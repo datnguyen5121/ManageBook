@@ -4,11 +4,11 @@ import { getBookPaginate } from "../../services/apiServices";
 import React from "react";
 import { Card } from "antd";
 import { Pagination } from "antd";
-import "./ListBookCateGory.scss";
+import "./ListBookSearch.scss";
 import { useNavigate } from "react-router-dom";
 const { Meta } = Card;
 
-const ListBookCateGory = () => {
+const ListBookSearch = () => {
   const [listBook, SetListBook] = useState([]);
   const [pageBookNumber, SetPageBookNumber] = useState(1);
   const [totalBook, setTotalBook] = useState("");
@@ -71,4 +71,4 @@ const ListBookCateGory = () => {
   );
 };
 
-export default ListBookCateGory;
+export default ListBookSearch;
