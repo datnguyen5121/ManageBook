@@ -12,6 +12,7 @@ import Cart from "./component/Cart/Cart";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 import ManageNavigation from "./component/Navigation/ManageNavigation";
 import Layout from "./Layout";
+import ListBookCateGory from "./container/ListBook/ListBookCateGory";
 const Router = (props) => {
   const [api, contextHolder] = notification.useNotification();
   return (
@@ -62,6 +63,14 @@ const Router = (props) => {
             element={
               <PrivateRoute>
                 <ManageUser />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="list-book-category"
+            element={
+              <PrivateRoute>
+                <ListBookCateGory />
               </PrivateRoute>
             }
           />

@@ -1,0 +1,26 @@
+.search-content{
+    position: absolute;
+    left: 18%;
+    top: 4px;
+    input {
+        width: 754px;
+        height: 35px;
+        border-radius: 9px;
+        border: 1px solid #d9d9d9;
+        padding: 0px 13px;
+        position: relative;
+        &:focus{
+            outline: 1px solid #00bfff;
+        }
+    }
+    .btn-search{
+        position: absolute;
+        right: 13px;
+        top: 10px;
+        color: #00bfff;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

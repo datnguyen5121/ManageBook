@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./Login.scss";
 import { postLoginUser } from "../../services/apiServices";
 import { useNavigate } from "react-router-dom";
-import { doLogin } from "../../redux/action/userAction";
+import { doLogin, doRegister } from "../../redux/action/userAction";
 import { useDispatch } from "react-redux";
 
 const Login = (props) => {
@@ -49,6 +49,10 @@ const Login = (props) => {
       navigate("/manage-book-user");
     }
     console.log(data);
+  };
+  const handleRegister = (event) => {
+    event.preventDefault();
+    props.handleToggle();
   };
   return (
     <>
@@ -114,7 +118,10 @@ const Login = (props) => {
               >
                 Log in
               </Button>
-              Or <a href="">register now!</a>
+              Or{" "}
+              <a href="" onClick={handleRegister}>
+                Register now!
+              </a>
             </Form.Item>
           </Form>
         </div>

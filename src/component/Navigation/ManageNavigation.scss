@@ -1,3 +1,48 @@
 .manage-navigation-container{
     border: 1px solid #a0cfee;
+    position: relative;
+    .homepage-listbook{
+        position: absolute;
+        left: 40px;
+        top: 7px;
+        .navbar-brand{
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            .brand-icon{
+                font-size: 30px;
+                color: #00bfff;
+                animation: spin 5s infinite linear;
+            }
+            .brand-title{
+                font-style: oblique;
+                margin-left: 10px;
+                font-size: 30px;
+                font-weight: 500;
+                color: #00bfff;
+                
+            }
+        }
+        @keyframes spin {
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+            to {
+                transform:  scale(1) rotate(360deg);
+            }
+        }
+    }
+    
+    .ant-menu.ant-menu-root{
+        display: flex !important;
+        justify-content: end;
+        .ant-menu-submenu{
+
+            &.ant-menu-submenu-title{
+
+                &.navigate-account{
+                }
+            }
+        }
+    }
 }

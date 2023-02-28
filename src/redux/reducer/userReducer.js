@@ -1,5 +1,6 @@
 import { FETCH_USER_LOGIN_SUCCESS } from "../action/userAction";
 import { LOGOUT_SUCCESS } from "../action/userAction";
+import { REGISTER_SUCCESS } from "../action/userAction";
 const INITIAL_STATE = {
   account: {
     access_token: "",
@@ -33,6 +34,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         },
         isAuthenticated: true,
       };
+
     case LOGOUT_SUCCESS:
       console.log("check action user", action);
       return {
@@ -50,7 +52,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
         },
         isAuthenticated: false,
       };
-
+    case REGISTER_SUCCESS:
+      return { ...state };
     default:
       return state;
   }

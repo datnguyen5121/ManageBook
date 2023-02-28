@@ -8,10 +8,12 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { doLogout } from "../../redux/action/userAction";
 import { removeAllCart } from "../../redux/action/cartAction";
+import { FaReact } from "react-icons/fa";
+import Search from "../search/Search";
 const ManageNavigation = () => {
   const dispatch = useDispatch();
 
@@ -28,37 +30,6 @@ const ManageNavigation = () => {
       key: "/manage-book-user",
       icon: <HomeOutlined />,
     },
-    {
-      label: "Thể loại",
-      key: "TypeBook",
-      icon: <BookOutlined />,
-      children: [
-        {
-          type: "group",
-          children: [
-            {
-              label: "Ngôn Tình",
-              key: "setting:1",
-            },
-            {
-              label: "SelfHelp",
-              key: "setting:2",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: <span>Top Trending</span>,
-      key: "rank",
-      icon: <HeartOutlined />,
-    },
-    {
-      label: "Tác giả",
-      key: "author",
-      icon: <AppstoreOutlined />,
-      // disabled: true,
-    },
 
     {
       label: <span>Giỏ hàng</span>,
@@ -66,9 +37,14 @@ const ManageNavigation = () => {
       key: "/cart",
     },
     {
-      label: "Tài khoản",
-      key: "SubMenu",
-      icon: <AppstoreOutlined />,
+      label: (
+        <span className="navigate-account">
+          <AppstoreOutlined />
+          Tài khoản
+        </span>
+      ),
+      key: "SubMenu1",
+
       children: [
         {
           type: "group",
@@ -111,6 +87,13 @@ const ManageNavigation = () => {
   // };
   return (
     <div className="manage-navigation-container">
+      <div className="homepage-listbook">
+        <NavLink to="/manage-book-user" className="navbar-brand">
+          <FaReact className="brand-icon" />
+          <div className="brand-title">Datnguyen</div>
+        </NavLink>
+      </div>
+      <Search />
       <Menu onClick={onClick} selectedKeys={[currentUrl]} mode="horizontal" items={items} />
     </div>
   );

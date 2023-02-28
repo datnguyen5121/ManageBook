@@ -1,28 +1,22 @@
 import { useEffect, useState } from "react";
 import { getAllBook } from "../../services/apiServices";
 import { getBookPaginate } from "../../services/apiServices";
-import { getBookPaginateCateGory } from "../../services/apiServices";
 import React from "react";
-import { Card, Form, Select } from "antd";
+import { Card } from "antd";
 import { Pagination } from "antd";
-import "./ListBook.scss";
+import "./ListBookCateGory.scss";
 import { useNavigate } from "react-router-dom";
-
 const { Meta } = Card;
-const { Option } = Select;
 
-const ListBook = () => {
+const ListBookCateGory = () => {
   const [listBook, SetListBook] = useState([]);
   const [pageBookNumber, SetPageBookNumber] = useState(1);
   const [totalBook, setTotalBook] = useState("");
-  const [category, setCategory] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     fetchBookList();
   }, [pageBookNumber]);
-  useEffect(() => {
-    fetchBookListCateGory();
-  }, [category]);
+
   const fetchBookList = async () => {
     let res = await getBookPaginate(10, pageBookNumber);
     console.log(res.data);
@@ -36,32 +30,9 @@ const ListBook = () => {
     // console.log("Page: ", pageNumber);
     SetPageBookNumber(pageNumber);
   };
-  const onCategoryChange = (value) => {
-    console.log(value);
-    setCategory(value);
-  };
-  const fetchBookListCateGory = async () => {
-    if (category) {
-      let res = await getBookPaginateCateGory(10, pageBookNumber, category);
-      console.log(res.data);
-      if (res && res.EC === 0) {
-        SetListBook(res.data.listBook);
-        setTotalBook(res.data.total);
-      }
-    } else {
-      fetchBookList();
-    }
-  };
+  // console.log(pageBookNumber);
   return (
     <>
-      <div className="category-content" label="Thể loại" value={category}>
-        <Select placeholder="Chọn thể loại sách" allowClear onChange={onCategoryChange}>
-          <Option value="">Tất cả</Option>
-          <Option value="Education">Education</Option>
-          <Option value="Self-help">Self-help</Option>
-          <Option value="Ngôn Tình">Ngôn Tình</Option>
-        </Select>
-      </div>
       <div className="listbook-container-scroll">
         <div className="listbook-container">
           {listBook?.map((item, index) => {
@@ -100,4 +71,4 @@ const ListBook = () => {
   );
 };
 
-export default ListBook;
+export default ListBookCateGory;

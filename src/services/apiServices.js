@@ -5,7 +5,10 @@ const postLoginUser = (userEmail, userPassword) => {
     password: userPassword,
   });
 };
-
+const postRegister = (email, password, firstName, lastName, address, gender) => {
+  const data = { email, password, firstName, lastName, address, gender };
+  return axios.post(`/api/handle-register`, data);
+};
 //Book
 // app.get(
 //   "/api/get-all-book",
@@ -52,6 +55,11 @@ const getAllBook = () => {
 const getBookPaginate = (perPage, page) => {
   return axios.get(`/api/get-book-paginate?page=${page}&limit=${perPage}`);
 };
+const getBookPaginateCateGory = (perPage, page, category) => {
+  return axios.get(
+    `/api/get-book-paginate-type?page=${page}&limit=${perPage}&category=${category}`,
+  );
+};
 const getBookById = (id) => {
   return axios.get(`/api/get-book-by-id?_id=${id}`);
 };
@@ -93,6 +101,8 @@ export {
   getAllBook,
   getBookPaginate,
   updateBookById,
+  postRegister,
   createNewBook,
+  getBookPaginateCateGory,
   getBookById,
 };
