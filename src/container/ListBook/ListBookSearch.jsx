@@ -1,28 +1,33 @@
 import { useEffect, useState } from "react";
 import { getAllBook } from "../../services/apiServices";
 import { getBookPaginate } from "../../services/apiServices";
+import { getBookPaginateSearch } from "../../services/apiServices";
 import React from "react";
 import { Card } from "antd";
 import { Pagination } from "antd";
 import "./ListBookSearch.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const { Meta } = Card;
 
-const ListBookSearch = () => {
-  const [listBook, SetListBook] = useState([]);
+const ListBookSearch = (props) => {
+  const valueText = useSelector((state) => state.book.valueText);
+  const [listBook, setListBook] = useState([]);
   const [pageBookNumber, SetPageBookNumber] = useState(1);
   const [totalBook, setTotalBook] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    fetchBookList();
-  }, [pageBookNumber]);
+    if (valueText) {
+      fetchBookSearch();
+    }
+  }, [valueText]);
 
-  const fetchBookList = async () => {
-    let res = await getBookPaginate(10, pageBookNumber);
-    console.log(res.data);
+  const fetchBookSearch = async () => {
+    let res = await getBookPaginateSearch(10, pageBookNumber, valueText);
+    console.log("res", res);
     if (res && res.EC === 0) {
-      SetListBook(res.data.listBook);
-      setTotalBook(res.data.totalBook);
+      setListBook(res.data.listBook);
+      setTotalBook(res.data.total);
     }
   };
 

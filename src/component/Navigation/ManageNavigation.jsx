@@ -29,6 +29,7 @@ const ManageNavigation = () => {
   const handleBtnSearch = () => {
     console.log(valueText);
     dispatch(doSearch(valueText));
+    // navigate("/manage-book-search");
     // setValueText("");
   };
   const items = [

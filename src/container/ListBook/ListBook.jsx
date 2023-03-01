@@ -34,7 +34,7 @@ const ListBook = (props) => {
   useEffect(() => {
     if (valueText) {
       fetchBookSearch();
-      dispatch(doSearch(""));
+      // dispatch(doSearch(""));
     }
   }, [valueText]);
 
