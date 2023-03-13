@@ -21,7 +21,7 @@ const DeleteAccount = (props) => {
         description: "Delete Success",
       });
       handleCancel();
-      await props.handleGetAllUserFromParent();
+      await props.fetchAllUserFromParent();
     } else {
       notification.error({
         message: "Error",

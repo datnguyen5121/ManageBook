@@ -29,7 +29,7 @@ const UpdateAccount = (props) => {
         description: "Update Success",
       });
       handleCancel();
-      await props.handleGetAllUserFromParent();
+      await props.fetchAllUserFromParent();
     } else {
       notification.error({
         message: "Error",

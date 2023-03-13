@@ -33,19 +33,19 @@ const ManageNavigation = () => {
     // setValueText("");
   };
   const items = [
-    {
-      label: (
-        <span
-          onClick={() => {
-            setValueText("");
-            // window.location.reload();
-          }}
-        >
-          <HomeOutlined /> Home
-        </span>
-      ),
-      key: "/manage-book-user",
-    },
+    // {
+    //   label: (
+    //     <span
+    //       onClick={() => {
+    //         setValueText("");
+    //         // window.location.reload();
+    //       }}
+    //     >
+    //       <HomeOutlined /> Home
+    //     </span>
+    //   ),
+    //   key: "/manage-book-user",
+    // },
 
     {
       label: <span>Giỏ hàng</span>,
